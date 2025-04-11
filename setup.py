@@ -10,7 +10,7 @@ setup(
     description="A library for reading and writing XML files to interact with Delft-FEWS.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    url="https://gitlab.com/rtc-tools-project/fews_xml/",
+    url="https://gitlab.com/FaridAlavi/fewsxml",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",
