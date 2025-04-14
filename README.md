@@ -27,7 +27,7 @@ data_in_xml = fx.read_xml(data)
 ```
 The `FXData` structure contains many fields, but for reading data, only the `inputFilePath` field needs to be filled. As a result of a successful read operation, the `FXData` instance is populated with relevant information. Most importantly, `FXData` contains a list of `FXTimeseries`, called `timeseries`, where each element represents one timeseries. For example, a list of timeseries with the `parameterId` of `paramId1` can be retrieved by:
 ```python
-tss = [timeserie for timeserie in data.timeseries if timeserie["parameterId"] == "paramId1"]
+tss = [timeserie for timeserie in data["timeseries"] if timeserie["parameterId"] == "paramId1"]
 ```
 
 ### Writing Procedure
