@@ -2,13 +2,20 @@
 
 A library to read and write XML files to interact with Delft-FEWS.
 
+## Installation
+```commandline
+pip install fewsxml
+```
+
+## Overview
+
 `fewsxml` provides two data structures:
 * FXTimeseries
 * FXData
 
 To read and write data from/to XML files with the FEWS PI standard, one needs to be familiar with these two data structures.
 
-## Reading Procedure
+### Reading Procedure
 Reading data from an XML file consists of two steps: first, create an instance of `FXData`, and second, call the function `read_xml`. Here is an example:
 ```python
 import fewsxml as fx
@@ -23,7 +30,7 @@ The `FXData` structure contains many fields, but for reading data, only the `inp
 tss = [timeserie for timeserie in data.timeseries if timeserie["parameterId"] == "paramId1"]
 ```
 
-## Writing Procedure
+### Writing Procedure
 The function `write_xml` is used for writing an XML file with the FEWS PI standard. Similar to the reading procedure, an instance of `FXData` must be created. However, the required fields in this case are `timeseries` and `outputFilePath`. The `outputFilePath` should indicate the location where the XML file will be created. The `timeseries` field is a list of `FXTimeseries` instances, where each instance represents a timeseries to be written into the XML file. The required fields in each `FXTimeseries` instance are:
 * `locationId`: The location ID of the timeseries.
 * `parameterId`: The parameter ID of the timeseries.
