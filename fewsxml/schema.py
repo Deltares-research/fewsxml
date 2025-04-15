@@ -4,6 +4,7 @@ from datetime import datetime
 class FXTimeseries(TypedDict):
     locationId: str
     parameterId: str
+    qualifierId: str
     timesteps: List[datetime]
     values: List[float]
     flags: List[float]

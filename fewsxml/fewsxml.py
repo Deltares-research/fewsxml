@@ -4,9 +4,18 @@ import xml.dom.minidom as minidom
 import os
 from datetime import datetime
 import numpy as np
+import importlib.resources as pkg_resources
+import fewsxml
 
 
 def read_xml(fxdata: FXData):
+    # Loading configs
+    configs = {}
+    with pkg_resources.files(fewsxml).joinpath("config.xml").open("rb") as f:
+        tree = ET.parse(f)
+    root = tree.getroot()
+    configs["reader_req"] = [elem.text for elem in root.findall("reader_req")]
+    # loading the input file
     tree = ET.parse(fxdata["inputFilePath"])
     root = tree.getroot()
     if "ns" not in fxdata.keys():
@@ -19,25 +28,25 @@ def read_xml(fxdata: FXData):
     for series in root.findall('ns:series', namespace):
         fxtimeseries: FXTimeseries = {}
         header = series.find('ns:header', namespace)
-        # Extract header information
-        fxtimeseries["type"] = header.find('ns:type', namespace).text
-        fxtimeseries["locationId"] = header.find('ns:locationId', namespace).text
-        fxtimeseries["parameterId"] = header.find('ns:parameterId', namespace).text
-        time_step_unit = header.find('ns:timeStep', namespace).attrib['unit']
-        if time_step_unit == "second":
-            fxtimeseries["timeStepSize"] = header.find('ns:timeStep', namespace).attrib['multiplier']
-        start_date = header.find('ns:startDate', namespace).attrib['date']
-        start_time = header.find('ns:startDate', namespace).attrib['time']
-        fxtimeseries["startDateTime"] = datetime.strptime(f"{start_date} {start_time}", "%Y-%m-%d %H:%M:%S")
-        end_date = header.find('ns:endDate', namespace).attrib['date']
-        end_time = header.find('ns:endDate', namespace).attrib['time']
-        fxtimeseries["endDateTime"] = datetime.strptime(f"{end_date} {end_time}", "%Y-%m-%d %H:%M:%S")
-        fxtimeseries["missVal"] = header.find('ns:missVal', namespace).text
-        fxtimeseries["stationName"] = header.find('ns:stationName', namespace).text
-        fxtimeseries["units"] = header.find('ns:units', namespace).text
-        creation_date = header.find('ns:creationDate', namespace).text
-        creation_time = header.find('ns:creationTime', namespace).text
-        fxtimeseries["creationDateTime"] = datetime.strptime(f"{creation_date} {creation_time}", "%Y-%m-%d %H:%M:%S")
+        # Get all properties under header
+        properties = {elem.tag.split('}', 1)[-1]: elem.attrib if elem.attrib else elem.text for elem in header}
+        if not all([req_property in properties.keys() for req_property in configs["reader_req"]]):
+            continue    # Skipping the timeseries that do not contain required properties
+        for property in properties:
+            if property == "timeStep":
+                time_step_unit = header.find('ns:timeStep', namespace).attrib['unit']
+                if time_step_unit == "second":
+                    fxtimeseries["timeStepSize"] = header.find('ns:timeStep', namespace).attrib['multiplier']
+            elif property == "startDate":
+                start_date = header.find('ns:startDate', namespace).attrib['date']
+                start_time = header.find('ns:startDate', namespace).attrib['time']
+                fxtimeseries["startDateTime"] = datetime.strptime(f"{start_date} {start_time}", "%Y-%m-%d %H:%M:%S")
+            elif property == "endDate":
+                end_date = header.find('ns:endDate', namespace).attrib['date']
+                end_time = header.find('ns:endDate', namespace).attrib['time']
+                fxtimeseries["endDateTime"] = datetime.strptime(f"{end_date} {end_time}", "%Y-%m-%d %H:%M:%S")
+            else:
+                fxtimeseries[property] = header.find('ns:' + property, namespace).text
         # Extract event information
         fxtimeseries["timesteps"] = []
         fxtimeseries["values"] = []
@@ -59,6 +68,12 @@ def read_xml(fxdata: FXData):
     return fxdata
 
 def write_xml(fxdata: FXData):
+    # Loading configs
+    configs = {}
+    with pkg_resources.files(fewsxml).joinpath("config.xml").open("rb") as f:
+        tree = ET.parse(f)
+    root = tree.getroot()
+    configs["writer_req"] = [elem.text for elem in root.findall("writer_req")]
     # Data fixing of overal XML information
     if "pi" not in fxdata.keys():
         fxdata["pi"] = "http://www.wldelft.nl/fews/PI"
@@ -80,11 +95,11 @@ def write_xml(fxdata: FXData):
             timeserie["units"] = "unit_unknown"
         if "creationDateTime" not in timeserie.keys():
             timeserie["creationDateTime"] = datetime.now()
-        l_necessary_keys = ["locationId", "parameterId", "timesteps"]
-        if not all(item in timeserie.keys() for item in l_necessary_keys):
-            raise Exception("The provided timeseries data is incomplete. Note that each individual timeseries should have appropriate values for the following list of keys:\n{}".format(l_necessary_keys))
         if "stationName" not in timeserie.keys():
             timeserie["stationName"] = timeserie["locationId"]
+        l_necessary_keys = configs["writer_req"]
+        if not all(item in timeserie.keys() for item in l_necessary_keys):
+            raise Exception("The provided timeseries data is incomplete. Note that each individual timeseries should have appropriate values for the following list of keys:\n{}".format(l_necessary_keys))
 
     # prelude information
     ET.register_namespace("pi", fxdata["pi"])
@@ -103,6 +118,8 @@ def write_xml(fxdata: FXData):
         ET.SubElement(header, "type").text = timeserie["type"]
         ET.SubElement(header, "locationId").text = timeserie["locationId"]
         ET.SubElement(header, "parameterId").text = timeserie["parameterId"]
+        if "qualifierId" in timeserie.keys():
+            ET.SubElement(header, "qualifierId").text = timeserie["qualifierId"]
         ET.SubElement(header, "timeStep", unit="second", multiplier=str(timeserie["timeStepSize"]))
         ET.SubElement(header, "startDate", date=timeserie["startDateTime"].strftime("%Y-%m-%d"), time=timeserie["startDateTime"].strftime("%H:%M:%S"))
         ET.SubElement(header, "endDate", date=timeserie["endDateTime"].strftime("%Y-%m-%d"), time=timeserie["endDateTime"].strftime("%H:%M:%S"))
@@ -111,6 +128,10 @@ def write_xml(fxdata: FXData):
         ET.SubElement(header, "units").text = timeserie["units"]
         ET.SubElement(header, "creationDate").text = timeserie["creationDateTime"].strftime("%Y-%m-%d")
         ET.SubElement(header, "creationTime").text = timeserie["creationDateTime"].strftime("%H:%M:%S")
+        l_manual_handlings = ["type", "locationId", "parameterId", "qualifierId", "timeStepSize", "startDateTime", "endDateTime", "missVal", "stationName", "units", "creationDateTime", "flags", "values", "timesteps"]
+        for key in timeserie.keys():
+            if key not in l_manual_handlings:
+                ET.SubElement(header, key).text = timeserie[key]
         if "flags" in timeserie.keys():
             for t, v, flag in zip(timeserie["timesteps"], timeserie["values"], timeserie["flags"]):
                 ET.SubElement(series, "event", date=t.strftime("%Y-%m-%d"), time=t.strftime("%H:%M:%S"), value=str(v if not np.isnan(v) else timeserie["missVal"]), flag=flag)

@@ -1,0 +1,8 @@
+<configs>
+    <reader_req>locationId</reader_req>
+    <reader_req>parameterId</reader_req>
+
+    <writer_req>locationId</writer_req>
+    <writer_req>parameterId</writer_req>
+    <writer_req>timesteps</writer_req>
+</configs>

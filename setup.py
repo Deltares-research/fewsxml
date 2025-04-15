@@ -2,9 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name="fewsxml",
-    version="0.1.1",
+    version="0.1.3",
     packages=find_packages(),
     install_requires=["numpy"],
+    include_package_data=True,
+    package_data={
+        "fewsxml": ["config.xml"],
+    },
     author="Farid Alavi",
     author_email="farid.alavi@deltares.nl",
     description="A library for reading and writing XML files to interact with Delft-FEWS.",
@@ -16,5 +20,5 @@ setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.7',
 )
