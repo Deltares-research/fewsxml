@@ -104,40 +104,41 @@ def write_xml(fxdata: FXData):
     # prelude information
     ET.register_namespace("pi", fxdata["pi"])
     ET.register_namespace("xsi", fxdata["xsi"])
-    root = ET.Element("TimeSeries", attrib={
-        "xmlns": fxdata["pi"],
+    tag_prefix = "pi:"
+    root = ET.Element(tag_prefix + "TimeSeries", attrib={
+        "xmlns:pi": fxdata["pi"],
         "xmlns:xsi": fxdata["xsi"],
         "xsi:schemaLocation": fxdata["schemaLocation"],
         "version": fxdata["version"]
     })
-    ET.SubElement(root, "timeZone").text = fxdata['timeZone']
+    ET.SubElement(root, tag_prefix + "timeZone").text = fxdata['timeZone']
     # adding timeseries
     for timeserie in fxdata["timeseries"]:
-        series = ET.SubElement(root, "series")
-        header = ET.SubElement(series, "header")
-        ET.SubElement(header, "type").text = timeserie["type"]
-        ET.SubElement(header, "locationId").text = timeserie["locationId"]
-        ET.SubElement(header, "parameterId").text = timeserie["parameterId"]
+        series = ET.SubElement(root, tag_prefix + "series")
+        header = ET.SubElement(series, tag_prefix + "header")
+        ET.SubElement(header, tag_prefix + "type").text = timeserie["type"]
+        ET.SubElement(header, tag_prefix + "locationId").text = timeserie["locationId"]
+        ET.SubElement(header, tag_prefix + "parameterId").text = timeserie["parameterId"]
         if "qualifierId" in timeserie.keys():
-            ET.SubElement(header, "qualifierId").text = timeserie["qualifierId"]
-        ET.SubElement(header, "timeStep", unit="second", multiplier=str(timeserie["timeStepSize"]))
-        ET.SubElement(header, "startDate", date=timeserie["startDateTime"].strftime("%Y-%m-%d"), time=timeserie["startDateTime"].strftime("%H:%M:%S"))
-        ET.SubElement(header, "endDate", date=timeserie["endDateTime"].strftime("%Y-%m-%d"), time=timeserie["endDateTime"].strftime("%H:%M:%S"))
-        ET.SubElement(header, "missVal").text = timeserie["missVal"]
-        ET.SubElement(header, "stationName").text = timeserie["stationName"]
-        ET.SubElement(header, "units").text = timeserie["units"]
-        ET.SubElement(header, "creationDate").text = timeserie["creationDateTime"].strftime("%Y-%m-%d")
-        ET.SubElement(header, "creationTime").text = timeserie["creationDateTime"].strftime("%H:%M:%S")
+            ET.SubElement(header, tag_prefix + "qualifierId").text = timeserie["qualifierId"]
+        ET.SubElement(header, tag_prefix + "timeStep", unit="second", multiplier=str(timeserie["timeStepSize"]))
+        ET.SubElement(header, tag_prefix + "startDate", date=timeserie["startDateTime"].strftime("%Y-%m-%d"), time=timeserie["startDateTime"].strftime("%H:%M:%S"))
+        ET.SubElement(header, tag_prefix + "endDate", date=timeserie["endDateTime"].strftime("%Y-%m-%d"), time=timeserie["endDateTime"].strftime("%H:%M:%S"))
+        ET.SubElement(header, tag_prefix + "missVal").text = timeserie["missVal"]
+        ET.SubElement(header, tag_prefix + "stationName").text = timeserie["stationName"]
+        ET.SubElement(header, tag_prefix + "units").text = timeserie["units"]
+        ET.SubElement(header, tag_prefix + "creationDate").text = timeserie["creationDateTime"].strftime("%Y-%m-%d")
+        ET.SubElement(header, tag_prefix + "creationTime").text = timeserie["creationDateTime"].strftime("%H:%M:%S")
         l_manual_handlings = ["type", "locationId", "parameterId", "qualifierId", "timeStepSize", "startDateTime", "endDateTime", "missVal", "stationName", "units", "creationDateTime", "flags", "values", "timesteps"]
         for key in timeserie.keys():
             if key not in l_manual_handlings:
                 ET.SubElement(header, key).text = timeserie[key]
         if "flags" in timeserie.keys():
             for t, v, flag in zip(timeserie["timesteps"], timeserie["values"], timeserie["flags"]):
-                ET.SubElement(series, "event", date=t.strftime("%Y-%m-%d"), time=t.strftime("%H:%M:%S"), value=str(v if not np.isnan(v) else timeserie["missVal"]), flag=flag)
+                ET.SubElement(series, tag_prefix + "event", date=t.strftime("%Y-%m-%d"), time=t.strftime("%H:%M:%S"), value=str(v if not np.isnan(v) else timeserie["missVal"]), flag=flag)
         else:
             for t, v in zip(timeserie["timesteps"], timeserie["values"]):
-                ET.SubElement(series, "event", date=t.strftime("%Y-%m-%d"), time=t.strftime("%H:%M:%S"), value=str(v if not np.isnan(v) else timeserie["missVal"]))
+                ET.SubElement(series, tag_prefix + "event", date=t.strftime("%Y-%m-%d"), time=t.strftime("%H:%M:%S"), value=str(v if not np.isnan(v) else timeserie["missVal"]))
 
     def prettify_xml(element):
         rough_string = ET.tostring(element, encoding="utf-8")
