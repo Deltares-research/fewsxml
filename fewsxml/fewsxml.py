@@ -121,7 +121,7 @@ def write_xml(fxdata: FXData):
         ET.SubElement(header, tag_prefix + "parameterId").text = timeserie["parameterId"]
         if "qualifierId" in timeserie.keys():
             ET.SubElement(header, tag_prefix + "qualifierId").text = timeserie["qualifierId"]
-        ET.SubElement(header, tag_prefix + "timeStep", unit="second", multiplier=str(timeserie["timeStepSize"]))
+        ET.SubElement(header, tag_prefix + "timeStep", unit="second", multiplier=str(int(timeserie["timeStepSize"])))
         ET.SubElement(header, tag_prefix + "startDate", date=timeserie["startDateTime"].strftime("%Y-%m-%d"), time=timeserie["startDateTime"].strftime("%H:%M:%S"))
         ET.SubElement(header, tag_prefix + "endDate", date=timeserie["endDateTime"].strftime("%Y-%m-%d"), time=timeserie["endDateTime"].strftime("%H:%M:%S"))
         ET.SubElement(header, tag_prefix + "missVal").text = timeserie["missVal"]
@@ -132,7 +132,7 @@ def write_xml(fxdata: FXData):
         l_manual_handlings = ["type", "locationId", "parameterId", "qualifierId", "timeStepSize", "startDateTime", "endDateTime", "missVal", "stationName", "units", "creationDateTime", "flags", "values", "timesteps"]
         for key in timeserie.keys():
             if key not in l_manual_handlings:
-                ET.SubElement(header, key).text = timeserie[key]
+                ET.SubElement(header, tag_prefix + key).text = timeserie[key]
         if "flags" in timeserie.keys():
             for t, v, flag in zip(timeserie["timesteps"], timeserie["values"], timeserie["flags"]):
                 ET.SubElement(series, tag_prefix + "event", date=t.strftime("%Y-%m-%d"), time=t.strftime("%H:%M:%S"), value=str(v if not np.isnan(v) else timeserie["missVal"]), flag=flag)

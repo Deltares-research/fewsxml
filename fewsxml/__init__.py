@@ -1,7 +1,7 @@
 from fewsxml.fewsxml import read_xml, write_xml
 from fewsxml.schema import FXData, FXTimeseries
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 __author__ = "Farid Alavi"
 
 __all__ = [
