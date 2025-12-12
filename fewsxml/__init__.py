@@ -1,12 +1,34 @@
-from fewsxml.fewsxml import read_xml, write_xml
-from fewsxml.schema import FXData, FXTimeseries
+# from .fewsxml import PITimeSeries, PISeries, PIHeader, PIEvent
+#
+# __all__ = [
+#     "PITimeSeries",
+#     "PISeries",
+#     "PIHeader",
+#     "PIEvent"
+# ]
 
-__version__ = "0.1.4"
-__author__ = "Farid Alavi"
+__version__ = "0.2.0"
 
-__all__ = [
-    "read_xml",
-    "write_xml",
-    "FXData",
-    "FXTimeseries"
-]
+from .fewsxml import (
+    # Models
+    PITimeSeries,
+    PISeries,
+    PIHeader,
+    PIEvent,
+    PIDateTime,
+    PITimeStep,
+    PIProperty,
+    PIStringProperty,
+    PIDoubleProperty,
+    PILongProperty,
+    PIIntProperty,
+    PIBooleanProperty,
+    PIDateProperty,
+    PIDateTimeProperty,
+    PIThresholds,
+    PIHighLevelThreshold,
+    PILowLevelThreshold,
+    # Functions
+    fx_write,
+    fx_read
+)

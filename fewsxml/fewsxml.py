@@ -1,152 +1,583 @@
-from .schema import FXData, FXTimeseries
+from __future__ import annotations
 import xml.etree.ElementTree as ET
-import xml.dom.minidom as minidom
-import os
-from datetime import datetime
-import numpy as np
-import importlib.resources as pkg_resources
-import fewsxml
+from typing import Optional, List, Dict, Any, Literal, Union
+from pydantic import BaseModel, Field
+from xml.dom import minidom
 
 
-def read_xml(fxdata: FXData):
-    # Loading configs
-    configs = {}
-    with pkg_resources.files(fewsxml).joinpath("config.xml").open("rb") as f:
-        tree = ET.parse(f)
-    root = tree.getroot()
-    configs["reader_req"] = [elem.text for elem in root.findall("reader_req")]
-    # loading the input file
-    tree = ET.parse(fxdata["inputFilePath"])
-    root = tree.getroot()
-    if "ns" not in fxdata.keys():
-        fxdata["ns"] = 'http://www.wldelft.nl/fews/PI'
-    namespace = {'ns': fxdata["ns"]}
-    # Extract general information
-    fxdata["timeZone"] = root.find('ns:timeZone', namespace).text
-    # Iterate through each series
-    fxdata["timeseries"] = []
-    for series in root.findall('ns:series', namespace):
-        fxtimeseries: FXTimeseries = {}
-        header = series.find('ns:header', namespace)
-        # Get all properties under header
-        properties = {elem.tag.split('}', 1)[-1]: elem.attrib if elem.attrib else elem.text for elem in header}
-        if not all([req_property in properties.keys() for req_property in configs["reader_req"]]):
-            continue    # Skipping the timeseries that do not contain required properties
-        for property in properties:
-            if property == "timeStep":
-                time_step_unit = header.find('ns:timeStep', namespace).attrib['unit']
-                if time_step_unit == "second":
-                    fxtimeseries["timeStepSize"] = header.find('ns:timeStep', namespace).attrib['multiplier']
-            elif property == "startDate":
-                start_date = header.find('ns:startDate', namespace).attrib['date']
-                start_time = header.find('ns:startDate', namespace).attrib['time']
-                fxtimeseries["startDateTime"] = datetime.strptime(f"{start_date} {start_time}", "%Y-%m-%d %H:%M:%S")
-            elif property == "endDate":
-                end_date = header.find('ns:endDate', namespace).attrib['date']
-                end_time = header.find('ns:endDate', namespace).attrib['time']
-                fxtimeseries["endDateTime"] = datetime.strptime(f"{end_date} {end_time}", "%Y-%m-%d %H:%M:%S")
+# ======================================================
+# BASE MODEL (allows unknown attributes)
+# ======================================================
+
+class XModel(BaseModel):
+    model_config = dict(extra="allow")
+
+
+# ======================================================
+# BASIC DATE/TIME
+# ======================================================
+
+class PIDateTime(XModel):
+    date: str
+    time: str
+
+
+# ======================================================
+# PROPERTIES
+# ======================================================
+
+class PIStringProperty(XModel):
+    key: str
+    value: str
+
+
+class PIDoubleProperty(XModel):
+    key: str
+    value: float
+
+
+class PILongProperty(XModel):
+    key: str
+    value: int
+
+
+class PIIntProperty(XModel):
+    key: str
+    value: int
+
+
+class PIBooleanProperty(XModel):
+    key: str
+    value: bool
+
+
+class PIDateProperty(XModel):
+    key: str
+    date: str
+
+
+class PIDateTimeProperty(XModel):
+    key: str
+    date: str
+    time: str
+
+
+PIProperty = Union[
+    PIStringProperty,
+    PIDoubleProperty,
+    PILongProperty,
+    PIIntProperty,
+    PIBooleanProperty,
+    PIDateProperty,
+    PIDateTimeProperty,
+]
+
+
+# ======================================================
+# THRESHOLDS
+# ======================================================
+
+class PIThresholdBase(XModel):
+    id: Optional[str] = None
+    name: Optional[str] = None
+    label: Optional[str] = None
+    description: Optional[str] = None
+    comment: Optional[str] = None
+    groupId: Optional[str] = None
+    groupName: Optional[str] = None
+    value: float
+
+
+class PIHighLevelThreshold(PIThresholdBase):
+    pass
+
+
+class PILowLevelThreshold(PIThresholdBase):
+    pass
+
+
+class PIThresholds(XModel):
+    highLevelThreshold: Optional[List[PIHighLevelThreshold]] = None
+    lowLevelThreshold: Optional[List[PILowLevelThreshold]] = None
+
+
+# ======================================================
+# TIMESTEP
+# ======================================================
+
+class PITimeStep(XModel):
+    unit: Optional[str] = None
+    multiplier: Optional[int] = None
+    minutes: Optional[int] = None
+
+
+# ======================================================
+# EVENT
+# ======================================================
+
+class PIEvent(XModel):
+    date: Optional[str] = None
+    time: Optional[str] = None
+
+    startDate: Optional[str] = None
+    startTime: Optional[str] = None
+    endDate: Optional[str] = None
+    endTime: Optional[str] = None
+
+    value: Optional[Union[float, str]] = None
+    minValue: Optional[float] = None
+    maxValue: Optional[float] = None
+
+    flag: Optional[int] = None
+
+    # unknown fs:* attributes accepted automatically (via extra="allow")
+
+
+# ======================================================
+# HEADER
+# ======================================================
+
+class PIHeader(XModel):
+    type: str
+
+    moduleInstanceId: Optional[str] = None
+    locationId: str
+    parameterId: str
+
+    qualifierId: Optional[List[str]] = None
+
+    ensembleId: Optional[str] = None
+    ensembleMemberIndex: Optional[int] = None
+
+    timeStep: Optional[PITimeStep] = None
+
+    startDate: PIDateTime
+    endDate: PIDateTime
+    forecastDate: Optional[PIDateTime] = None
+
+    missVal: Optional[str] = None
+    stationName: Optional[str] = None
+
+    lat: Optional[float] = None
+    lon: Optional[float] = None
+    x: Optional[float] = None
+    y: Optional[float] = None
+    z: Optional[float] = None
+
+    longName: Optional[str] = None
+    units: Optional[str] = None
+
+    sourceOrganisation: Optional[str] = None
+    sourceSystem: Optional[str] = None
+
+    fileDescription: Optional[str] = None
+
+    creationDate: Optional[str] = None
+    creationTime: Optional[str] = None
+
+    thresholds: Optional[PIThresholds] = None
+
+
+# ======================================================
+# SERIES
+# ======================================================
+
+class PISeries(XModel):
+    header: PIHeader
+    properties: Optional[List[PIProperty]] = None
+    event: List[PIEvent]
+
+
+# ======================================================
+# ROOT
+# ======================================================
+
+class PITimeSeries(XModel):
+    version: Optional[str]
+    timeZone: float
+    series: List[PISeries]
+
+
+
+
+def _set_if_not_none(elem: ET.Element, tag: str, value):
+    """Create a subelement <tag>value</tag> if value is not None."""
+    if value is not None:
+        sub = ET.SubElement(elem, tag)
+        sub.text = str(value)
+
+
+def _add_date_time(parent: ET.Element, tag: str, dt):
+    """Create something like: <startDate date="YYYY-MM-DD" time="HH:MM:SS" />"""
+    if dt:
+        elem = ET.SubElement(parent, tag)
+        elem.set("date", dt.date)
+        elem.set("time", dt.time)
+
+
+def _add_time_step(parent: ET.Element, ts):
+    if ts:
+        elem = ET.SubElement(parent, "timeStep")
+        if ts.unit is not None:
+            elem.set("unit", ts.unit)
+        if ts.multiplier is not None:
+            elem.set("multiplier", str(ts.multiplier))
+        if ts.minutes is not None:
+            elem.set("minutes", str(ts.minutes))
+
+
+def _add_properties(parent: ET.Element, properties):
+    if not properties:
+        return
+    for p in properties:
+        tag = "property"
+        # Each property becomes:
+        # <property key="..." value="...">
+        elem = ET.SubElement(parent, tag)
+        elem.set("key", p.key)
+
+        # Identify type-specific fields
+        if hasattr(p, "value"):
+            elem.set("value", str(p.value))
+        if hasattr(p, "date"):
+            elem.set("date", p.date)
+        if hasattr(p, "time"):
+            elem.set("time", p.time)
+
+
+def _add_thresholds(parent: ET.Element, thresholds):
+    if not thresholds:
+        return
+
+    ts_elem = ET.SubElement(parent, "thresholds")
+
+    def add(th_list, tag):
+        if not th_list:
+            return
+        for th in th_list:
+            elem = ET.SubElement(ts_elem, tag)
+            for attr in [
+                "id", "name", "label", "description", "comment",
+                "groupId", "groupName", "value"
+            ]:
+                val = getattr(th, attr, None)
+                if val is not None:
+                    elem.set(attr, str(val))
+
+    add(thresholds.highLevelThreshold, "highLevelThreshold")
+    add(thresholds.lowLevelThreshold, "lowLevelThreshold")
+
+
+def _add_event(parent: ET.Element, ev):
+    elem = ET.SubElement(parent, "event")
+
+    # date/time
+    if ev.date is not None:
+        elem.set("date", ev.date)
+    if ev.time is not None:
+        elem.set("time", ev.time)
+
+    # start / end date + time
+    if ev.startDate is not None:
+        elem.set("startDate", ev.startDate)
+    if ev.startTime is not None:
+        elem.set("startTime", ev.startTime)
+    if ev.endDate is not None:
+        elem.set("endDate", ev.endDate)
+    if ev.endTime is not None:
+        elem.set("endTime", ev.endTime)
+
+    # value
+    if ev.value is not None:
+        elem.set("value", str(ev.value))
+
+    # min/max
+    if ev.minValue is not None:
+        elem.set("minValue", str(ev.minValue))
+    if ev.maxValue is not None:
+        elem.set("maxValue", str(ev.maxValue))
+
+    # flag
+    if ev.flag is not None:
+        elem.set("flag", str(ev.flag))
+
+    # unknown attributes (fs:*)
+    for k, v in ev.__dict__.items():
+        if k.startswith("fs:"):
+            elem.set(k, str(v))
+
+# ---------------------------------------------------------------------
+def fx_write(pi: "PITimeSeries", filename: str):
+    NS = "http://www.wldelft.nl/fews/PI"
+    XSI = "http://www.w3.org/2001/XMLSchema-instance"
+
+    ET.register_namespace("", NS)
+    ET.register_namespace("xsi", XSI)
+
+    root = ET.Element(
+        f"{{{NS}}}TimeSeries",
+        {
+            "version": pi.version if pi.version else "",
+            f"{{{XSI}}}schemaLocation":
+                f"{NS} https://fewsdocs.deltares.nl/schemas/version1.0/pi-schemas/pi_timeseries.xsd",
+        },
+    )
+
+    # <timeZone>
+    _set_if_not_none(root, "timeZone", pi.timeZone)
+
+    # Each <series>
+    for s in pi.series:
+        s_elem = ET.SubElement(root, "series")
+
+        # ------------------- HEADER -------------------
+        h = s.header
+        h_elem = ET.SubElement(s_elem, "header")
+
+        _set_if_not_none(h_elem, "type", h.type)
+        _set_if_not_none(h_elem, "moduleInstanceId", h.moduleInstanceId)
+        _set_if_not_none(h_elem, "locationId", h.locationId)
+        _set_if_not_none(h_elem, "parameterId", h.parameterId)
+
+        # qualifierId is a list
+        if h.qualifierId:
+            for q in h.qualifierId:
+                _set_if_not_none(h_elem, "qualifierId", q)
+
+        _set_if_not_none(h_elem, "ensembleId", h.ensembleId)
+        _set_if_not_none(h_elem, "ensembleMemberIndex", h.ensembleMemberIndex)
+
+        # timeStep
+        _add_time_step(h_elem, h.timeStep)
+
+        # Dates
+        _add_date_time(h_elem, "startDate", h.startDate)
+        _add_date_time(h_elem, "endDate", h.endDate)
+        if h.forecastDate:
+            _add_date_time(h_elem, "forecastDate", h.forecastDate)
+
+        # Simple fields
+        for tag in [
+            "missVal", "stationName", "lat", "lon", "x", "y", "z",
+            "longName", "units", "sourceOrganisation", "sourceSystem",
+            "fileDescription", "creationDate", "creationTime"
+        ]:
+            _set_if_not_none(h_elem, tag, getattr(h, tag))
+
+        # thresholds
+        _add_thresholds(h_elem, h.thresholds)
+
+        # ------------------- PROPERTIES -------------------
+        _add_properties(s_elem, s.properties)
+
+        # ------------------- EVENTS -------------------
+        for ev in s.event:
+            _add_event(s_elem, ev)
+
+    # Pretty printing
+    xml_bytes = ET.tostring(root, encoding="utf-8")
+    pretty = minidom.parseString(xml_bytes).toprettyxml(indent="  ", encoding="utf-8")
+
+    with open(filename, "wb") as f:
+        f.write(pretty)
+
+
+
+
+
+NS = {"pi": "http://www.wldelft.nl/fews/PI"}
+
+# ----------------------------------------------------------------------
+# Helper: read date/time composite element
+# ----------------------------------------------------------------------
+def _parse_date_time(elem: ET.Element) -> PIDateTime:
+    return PIDateTime(
+        date=elem.attrib.get("date"),
+        time=elem.attrib.get("time")
+    )
+
+
+# ----------------------------------------------------------------------
+# Helper: parse typed <properties>
+# ----------------------------------------------------------------------
+def _parse_property(elem: ET.Element) -> PIProperty:
+
+    tag = elem.tag
+
+    # Simple key/value types
+    if tag == "string":
+        return PIStringProperty(key=elem.attrib["key"], value=elem.attrib["value"])
+    if tag == "double":
+        return PIDoubleProperty(key=elem.attrib["key"], value=float(elem.attrib["value"]))
+    if tag == "long":
+        return PILongProperty(key=elem.attrib["key"], value=int(elem.attrib["value"]))
+    if tag == "int":
+        return PIIntProperty(key=elem.attrib["key"], value=int(elem.attrib["value"]))
+    if tag == "boolean":
+        v = elem.attrib["value"].lower() == "true"
+        return PIBooleanProperty(key=elem.attrib["key"], value=v)
+
+    # Date property
+    if tag == "date":
+        return PIDateProperty(key=elem.attrib["key"], date=elem.attrib["value"])
+
+    # Date-time property
+    if tag == "dateTime":
+        return PIDateTimeProperty(
+            key=elem.attrib["key"],
+            date=elem.attrib["date"],
+            time=elem.attrib["time"]
+        )
+
+    raise ValueError(f"Unknown property tag: {tag}")
+
+
+# ----------------------------------------------------------------------
+# Helper: thresholds
+# ----------------------------------------------------------------------
+def _parse_thresholds(elem: ET.Element) -> PIThresholds:
+    highs = []
+    lows = []
+
+    for h in elem.findall("pi:highLevelThreshold", namespaces=NS):
+        attrs = {k: v for k, v in h.attrib.items() if k != "value"}
+        highs.append(PIHighLevelThreshold(value=float(h.attrib["value"]), **attrs))
+
+    for l in elem.findall("pi:lowLevelThreshold", namespaces=NS):
+        attrs = {k: v for k, v in l.attrib.items() if k != "value"}
+        lows.append(PILowLevelThreshold(value=float(l.attrib["value"]), **attrs))
+
+    return PIThresholds(
+        highLevelThreshold=highs or None,
+        lowLevelThreshold=lows or None
+    )
+
+
+# ----------------------------------------------------------------------
+# Helper: parse <event>
+# ----------------------------------------------------------------------
+def _parse_event(elem: ET.Element) -> PIEvent:
+    attrs = dict(elem.attrib)
+
+    # Convert numeric fields where needed
+    if "value" in attrs:
+        v = attrs["value"]
+        try:
+            attrs["value"] = float(v)
+        except ValueError:
+            attrs["value"] = v  # allow NaN or text
+
+    if "minValue" in attrs:
+        attrs["minValue"] = float(attrs["minValue"])
+    if "maxValue" in attrs:
+        attrs["maxValue"] = float(attrs["maxValue"])
+    if "flag" in attrs:
+        attrs["flag"] = int(attrs["flag"])
+
+    return PIEvent(**attrs)
+
+
+# ----------------------------------------------------------------------
+# Helper: parse <header>
+# ----------------------------------------------------------------------
+def _parse_header(elem: ET.Element) -> PIHeader:
+    type_text = elem.findtext("pi:type", namespaces=NS)
+    attribs = {"type": type_text}
+
+    # Required simple text elements:
+    locationId = elem.findtext("pi:locationId", namespaces=NS)
+    parameterId = elem.findtext("pi:parameterId", namespaces=NS)
+
+    attribs["locationId"] = locationId
+    attribs["parameterId"] = parameterId
+
+    # qualifierId list
+    qualifiers = [q.text for q in elem.findall("pi:qualifierId", namespaces=NS)]
+    if qualifiers:
+        attribs["qualifierId"] = qualifiers
+
+    # moduleInstanceId
+    if (mi := elem.findtext("pi:moduleInstanceId", namespaces=NS)) is not None:
+        attribs["moduleInstanceId"] = mi
+
+    # times
+    attribs["startDate"] = _parse_date_time(elem.find("pi:startDate", namespaces=NS))
+    attribs["endDate"] = _parse_date_time(elem.find("pi:endDate", namespaces=NS))
+
+    if (fd := elem.find("pi:forecastDate", namespaces=NS)) is not None:
+        attribs["forecastDate"] = _parse_date_time(fd)
+
+    # timeStep
+    if (ts := elem.find("pi:timeStep", namespaces=NS)) is not None:
+        ts_kwargs = {k: int(v) if k in ("multiplier", "minutes") else v
+                     for k, v in ts.attrib.items()}
+        attribs["timeStep"] = ts_kwargs
+
+    # optional scalar tags
+    optional_tags = [
+        "missVal", "stationName", "longName", "units", "sourceOrganisation",
+        "sourceSystem", "fileDescription", "creationDate", "creationTime",
+        "lat", "lon", "x", "y", "z"
+    ]
+
+    for tag in optional_tags:
+        if elem.find("pi:" + tag, namespaces= NS) is not None:
+            txt = elem.findtext("pi:" + tag, namespaces= NS)
+            # float conversion for coords
+            if tag in ("lat", "lon", "x", "y", "z"):
+                attribs[tag] = float(txt)
             else:
-                fxtimeseries[property] = header.find('ns:' + property, namespace).text
-        # Extract event information
-        fxtimeseries["timesteps"] = []
-        fxtimeseries["values"] = []
-        fxtimeseries["flags"] = []
-        for event in series.findall('ns:event', namespace):
-            event_date = event.attrib['date']
-            event_time = event.attrib['time']
-            fxtimeseries["timesteps"].append(datetime.strptime(f"{event_date} {event_time}", "%Y-%m-%d %H:%M:%S"))
-            try:
-                value = float(event.attrib['value'])
-            except ValueError:
-                value = fxtimeseries["missVal"]
-            fxtimeseries["values"].append(value)
-            if "flag" in event.attrib.keys():
-                fxtimeseries["flags"].append(event.attrib['flag'])
-        if not fxtimeseries["flags"]:
-            del fxtimeseries["flags"]
-        fxdata["timeseries"].append(fxtimeseries)
-    return fxdata
+                attribs[tag] = txt
 
-def write_xml(fxdata: FXData):
-    # Loading configs
-    configs = {}
-    with pkg_resources.files(fewsxml).joinpath("config.xml").open("rb") as f:
-        tree = ET.parse(f)
+    # thresholds
+    if (th := elem.find("pi:thresholds", namespaces=NS)) is not None:
+        attribs["thresholds"] = _parse_thresholds(th)
+
+    return PIHeader(**attribs)
+
+
+# ----------------------------------------------------------------------
+# Helper: parse <series>
+# ----------------------------------------------------------------------
+def _parse_series(elem: ET.Element) -> PISeries:
+    header = elem.find("pi:header", NS)
+    parsed_header = _parse_header(header)
+
+    # properties
+    props_container = elem.find("pi:properties", NS)
+    props = None
+    if props_container is not None:
+        props = [_parse_property(p) for p in list(props_container)]
+
+    # events
+    events = [_parse_event(e) for e in elem.findall("pi:event", NS)]
+
+    return PISeries(
+        header=parsed_header,
+        properties=props,
+        event=events
+    )
+
+
+# ----------------------------------------------------------------------
+# MAIN ENTRY POINT
+# ----------------------------------------------------------------------
+
+def fx_read(filepath: str) -> PITimeSeries:
+    tree = ET.parse(filepath)
     root = tree.getroot()
-    configs["writer_req"] = [elem.text for elem in root.findall("writer_req")]
-    # Data fixing of overal XML information
-    if "pi" not in fxdata.keys():
-        fxdata["pi"] = "http://www.wldelft.nl/fews/PI"
-    if "xsi" not in fxdata.keys():
-        fxdata["xsi"] = "http://www.w3.org/2001/XMLSchema-instance"
-    if "version" not in fxdata.keys():
-        fxdata["version"] = "1.2"
-    if "schemaLocation" not in fxdata.keys():
-        fxdata["schemaLocation"] = "http://www.wldelft.nl/fews/PI https://fewsdocs.deltares.nl/schemas/version1.0/pi-schemas/pi_timeseries.xsd"
-    if "timeZone" not in fxdata.keys():
-        fxdata['timeZone'] = "1.0"
-    # Data fixing and validity check of individual timeseries
-    for timeserie in fxdata["timeseries"]:
-        if "missVal" not in timeserie.keys():
-            timeserie["missVal"] = "-999"
-        if "type" not in timeserie.keys():
-            timeserie["type"] = "instantaneous"
-        if "units" not in timeserie.keys():
-            timeserie["units"] = "unit_unknown"
-        if "creationDateTime" not in timeserie.keys():
-            timeserie["creationDateTime"] = datetime.now()
-        if "stationName" not in timeserie.keys():
-            timeserie["stationName"] = timeserie["locationId"]
-        l_necessary_keys = configs["writer_req"]
-        if not all(item in timeserie.keys() for item in l_necessary_keys):
-            raise Exception("The provided timeseries data is incomplete. Note that each individual timeseries should have appropriate values for the following list of keys:\n{}".format(l_necessary_keys))
 
-    # prelude information
-    ET.register_namespace("pi", fxdata["pi"])
-    ET.register_namespace("xsi", fxdata["xsi"])
-    tag_prefix = "pi:"
-    root = ET.Element(tag_prefix + "TimeSeries", attrib={
-        "xmlns:pi": fxdata["pi"],
-        "xmlns:xsi": fxdata["xsi"],
-        "xsi:schemaLocation": fxdata["schemaLocation"],
-        "version": fxdata["version"]
-    })
-    ET.SubElement(root, tag_prefix + "timeZone").text = fxdata['timeZone']
-    # adding timeseries
-    for timeserie in fxdata["timeseries"]:
-        series = ET.SubElement(root, tag_prefix + "series")
-        header = ET.SubElement(series, tag_prefix + "header")
-        ET.SubElement(header, tag_prefix + "type").text = timeserie["type"]
-        ET.SubElement(header, tag_prefix + "locationId").text = timeserie["locationId"]
-        ET.SubElement(header, tag_prefix + "parameterId").text = timeserie["parameterId"]
-        if "qualifierId" in timeserie.keys():
-            ET.SubElement(header, tag_prefix + "qualifierId").text = timeserie["qualifierId"]
-        ET.SubElement(header, tag_prefix + "timeStep", unit="second", multiplier=str(int(timeserie["timeStepSize"])))
-        ET.SubElement(header, tag_prefix + "startDate", date=timeserie["startDateTime"].strftime("%Y-%m-%d"), time=timeserie["startDateTime"].strftime("%H:%M:%S"))
-        ET.SubElement(header, tag_prefix + "endDate", date=timeserie["endDateTime"].strftime("%Y-%m-%d"), time=timeserie["endDateTime"].strftime("%H:%M:%S"))
-        ET.SubElement(header, tag_prefix + "missVal").text = timeserie["missVal"]
-        ET.SubElement(header, tag_prefix + "stationName").text = timeserie["stationName"]
-        ET.SubElement(header, tag_prefix + "units").text = timeserie["units"]
-        ET.SubElement(header, tag_prefix + "creationDate").text = timeserie["creationDateTime"].strftime("%Y-%m-%d")
-        ET.SubElement(header, tag_prefix + "creationTime").text = timeserie["creationDateTime"].strftime("%H:%M:%S")
-        l_manual_handlings = ["type", "locationId", "parameterId", "qualifierId", "timeStepSize", "startDateTime", "endDateTime", "missVal", "stationName", "units", "creationDateTime", "flags", "values", "timesteps"]
-        for key in timeserie.keys():
-            if key not in l_manual_handlings:
-                ET.SubElement(header, tag_prefix + key).text = timeserie[key]
-        if "flags" in timeserie.keys():
-            for t, v, flag in zip(timeserie["timesteps"], timeserie["values"], timeserie["flags"]):
-                ET.SubElement(series, tag_prefix + "event", date=t.strftime("%Y-%m-%d"), time=t.strftime("%H:%M:%S"), value=str(v if not np.isnan(v) else timeserie["missVal"]), flag=flag)
-        else:
-            for t, v in zip(timeserie["timesteps"], timeserie["values"]):
-                ET.SubElement(series, tag_prefix + "event", date=t.strftime("%Y-%m-%d"), time=t.strftime("%H:%M:%S"), value=str(v if not np.isnan(v) else timeserie["missVal"]))
+    version = root.attrib.get("version")
 
-    def prettify_xml(element):
-        rough_string = ET.tostring(element, encoding="utf-8")
-        parsed = minidom.parseString(rough_string)
-        return parsed.toprettyxml(indent="    ", encoding="UTF-8")
-    if "outputFilePath" not in fxdata.keys():
-        raise Exception("outputFilePath is not stored in the given FXData argument.")
-    else:
-        xml_export_path = os.path.join(fxdata["outputFilePath"])
-    with open(xml_export_path, "wb") as f:
-        f.write(prettify_xml(root))
+    tz_elem = root.find("pi:timeZone", NS)
+    if tz_elem is None or tz_elem.text is None:
+        raise ValueError("Missing <timeZone> element")
+    timeZone = float(tz_elem.text)
+
+    series = [_parse_series(s) for s in root.findall("pi:series", NS)]
+
+    return PITimeSeries(
+        version=version,
+        timeZone=timeZone,
+        series=series
+    )
