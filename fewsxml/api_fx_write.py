@@ -115,7 +115,7 @@ def _add_event(parent: ET.Element, ev):
             elem.set(k, str(v))
 
 # ---------------------------------------------------------------------
-def fx_write(pi: "PITimeSeries", filename: str):
+def write(pi: "PITimeSeries", filename: str):
     NS = "http://www.wldelft.nl/fews/PI"
     XSI = "http://www.w3.org/2001/XMLSchema-instance"
 

@@ -185,7 +185,7 @@ def _parse_series(elem: ET.Element) -> PISeries:
 # MAIN ENTRY POINT
 # ----------------------------------------------------------------------
 
-def fx_read(filepath: str) -> PITimeSeries:
+def read(filepath: str) -> PITimeSeries:
     tree = ET.parse(filepath)
     root = tree.getroot()
 
