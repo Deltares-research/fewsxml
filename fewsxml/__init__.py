@@ -1,15 +1,6 @@
-# from .fewsxml import PITimeSeries, PISeries, PIHeader, PIEvent
-#
-# __all__ = [
-#     "PITimeSeries",
-#     "PISeries",
-#     "PIHeader",
-#     "PIEvent"
-# ]
-
 __version__ = "0.2.0"
 
-from .fewsxml import (
+from .models import (
     # Models
     PITimeSeries,
     PISeries,
@@ -28,7 +19,12 @@ from .fewsxml import (
     PIThresholds,
     PIHighLevelThreshold,
     PILowLevelThreshold,
-    # Functions
+)
+
+from .api_fx_read import (
+    fx_read,
+)
+
+from .api_fx_write import (
     fx_write,
-    fx_read
 )
