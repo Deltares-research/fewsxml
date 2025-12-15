@@ -2,13 +2,10 @@ from setuptools import setup, find_packages
 
 setup(
     name="fewsxml",
-    version="0.1.4",
+    version="0.2.0",
     packages=find_packages(),
-    install_requires=["numpy"],
+    install_requires=["pydantic"],
     include_package_data=True,
-    package_data={
-        "fewsxml": ["config.xml"],
-    },
     author="Farid Alavi",
     author_email="farid.alavi@deltares.nl",
     description="A library for reading and writing XML files to interact with Delft-FEWS.",
