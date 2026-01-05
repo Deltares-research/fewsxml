@@ -7,6 +7,7 @@ from pydantic import BaseModel
 # BASE MODEL (allows unknown attributes)
 # ======================================================
 
+
 class XModel(BaseModel):
     model_config = dict(extra="allow")
 
@@ -14,6 +15,7 @@ class XModel(BaseModel):
 # ======================================================
 # BASIC DATE/TIME
 # ======================================================
+
 
 class PIDateTime(XModel):
     date: str
@@ -23,6 +25,7 @@ class PIDateTime(XModel):
 # ======================================================
 # PROPERTIES
 # ======================================================
+
 
 class PIStringProperty(XModel):
     key: str
@@ -75,6 +78,7 @@ PIProperty = Union[
 # THRESHOLDS
 # ======================================================
 
+
 class PIThresholdBase(XModel):
     id: Optional[str] = None
     name: Optional[str] = None
@@ -103,6 +107,7 @@ class PIThresholds(XModel):
 # TIMESTEP
 # ======================================================
 
+
 class PITimeStep(XModel):
     unit: Optional[str] = None
     multiplier: Optional[int] = None
@@ -112,6 +117,7 @@ class PITimeStep(XModel):
 # ======================================================
 # EVENT
 # ======================================================
+
 
 class PIEvent(XModel):
     date: Optional[str] = None
@@ -134,6 +140,7 @@ class PIEvent(XModel):
 # ======================================================
 # HEADER
 # ======================================================
+
 
 class PIHeader(XModel):
     type: str
@@ -180,6 +187,7 @@ class PIHeader(XModel):
 # SERIES
 # ======================================================
 
+
 class PISeries(XModel):
     header: PIHeader
     properties: Optional[List[PIProperty]] = None
@@ -189,6 +197,7 @@ class PISeries(XModel):
 # ======================================================
 # ROOT
 # ======================================================
+
 
 class PITimeSeries(XModel):
     version: Optional[str]

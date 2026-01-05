@@ -1,0 +1,26 @@
+name: Lint Check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'   # choose the version you use locally
+
+      - name: Install Flake8
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8
+
+      - name: Run Flake8
+        run: |
+          flake8 .
