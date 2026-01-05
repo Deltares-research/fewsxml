@@ -1,11 +1,6 @@
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
-from .models import (
-    PITimeSeries, PISeries, PIHeader, PIEvent, PIProperty,
-    PIDateTime, PIThresholds, PIHighLevelThreshold, PILowLevelThreshold,
-    PIStringProperty, PIDoubleProperty, PILongProperty, PIIntProperty,
-    PIBooleanProperty, PIDateProperty, PIDateTimeProperty
-)
+from .models import PITimeSeries
 
 
 def _set_if_not_none(elem: ET.Element, tag: str, value):
@@ -65,8 +60,14 @@ def _add_thresholds(parent: ET.Element, thresholds):
         for th in th_list:
             elem = ET.SubElement(ts_elem, tag)
             for attr in [
-                "id", "name", "label", "description", "comment",
-                "groupId", "groupName", "value"
+                "id",
+                "name",
+                "label",
+                "description",
+                "comment",
+                "groupId",
+                "groupName",
+                "value",
             ]:
                 val = getattr(th, attr, None)
                 if val is not None:
@@ -114,6 +115,7 @@ def _add_event(parent: ET.Element, ev):
         if k.startswith("fs:"):
             elem.set(k, str(v))
 
+
 # ---------------------------------------------------------------------
 def write(pi: "PITimeSeries", filename: str):
     NS = "http://www.wldelft.nl/fews/PI"
@@ -126,8 +128,7 @@ def write(pi: "PITimeSeries", filename: str):
         f"{{{NS}}}TimeSeries",
         {
             "version": pi.version if pi.version else "",
-            f"{{{XSI}}}schemaLocation":
-                f"{NS} https://fewsdocs.deltares.nl/schemas/version1.0/pi-schemas/pi_timeseries.xsd",
+            f"{{{XSI}}}schemaLocation": f"{NS} https://fewsdocs.deltares.nl/schemas/version1.0/pi-schemas/pi_timeseries.xsd",
         },
     )
 
@@ -166,9 +167,20 @@ def write(pi: "PITimeSeries", filename: str):
 
         # Simple fields
         for tag in [
-            "missVal", "stationName", "lat", "lon", "x", "y", "z",
-            "longName", "units", "sourceOrganisation", "sourceSystem",
-            "fileDescription", "creationDate", "creationTime"
+            "missVal",
+            "stationName",
+            "lat",
+            "lon",
+            "x",
+            "y",
+            "z",
+            "longName",
+            "units",
+            "sourceOrganisation",
+            "sourceSystem",
+            "fileDescription",
+            "creationDate",
+            "creationTime",
         ]:
             _set_if_not_none(h_elem, tag, getattr(h, tag))
 

@@ -1,22 +1,32 @@
 import xml.etree.ElementTree as ET
 from .models import (
-    PITimeSeries, PISeries, PIHeader, PIEvent, PIProperty,
-    PIDateTime, PIThresholds, PIHighLevelThreshold, PILowLevelThreshold,
-    PIStringProperty, PIDoubleProperty, PILongProperty, PIIntProperty,
-    PIBooleanProperty, PIDateProperty, PIDateTimeProperty
+    PITimeSeries,
+    PISeries,
+    PIHeader,
+    PIEvent,
+    PIProperty,
+    PIDateTime,
+    PIThresholds,
+    PIHighLevelThreshold,
+    PILowLevelThreshold,
+    PIStringProperty,
+    PIDoubleProperty,
+    PILongProperty,
+    PIIntProperty,
+    PIBooleanProperty,
+    PIDateProperty,
+    PIDateTimeProperty,
 )
 
 
 NS = {"pi": "http://www.wldelft.nl/fews/PI"}
 
+
 # ----------------------------------------------------------------------
 # Helper: read date/time composite element
 # ----------------------------------------------------------------------
 def _parse_date_time(elem: ET.Element) -> PIDateTime:
-    return PIDateTime(
-        date=elem.attrib.get("date"),
-        time=elem.attrib.get("time")
-    )
+    return PIDateTime(date=elem.attrib.get("date"), time=elem.attrib.get("time"))
 
 
 # ----------------------------------------------------------------------
@@ -30,7 +40,9 @@ def _parse_property(elem: ET.Element) -> PIProperty:
     if tag == "string":
         return PIStringProperty(key=elem.attrib["key"], value=elem.attrib["value"])
     if tag == "double":
-        return PIDoubleProperty(key=elem.attrib["key"], value=float(elem.attrib["value"]))
+        return PIDoubleProperty(
+            key=elem.attrib["key"], value=float(elem.attrib["value"])
+        )
     if tag == "long":
         return PILongProperty(key=elem.attrib["key"], value=int(elem.attrib["value"]))
     if tag == "int":
@@ -46,9 +58,7 @@ def _parse_property(elem: ET.Element) -> PIProperty:
     # Date-time property
     if tag == "dateTime":
         return PIDateTimeProperty(
-            key=elem.attrib["key"],
-            date=elem.attrib["date"],
-            time=elem.attrib["time"]
+            key=elem.attrib["key"], date=elem.attrib["date"], time=elem.attrib["time"]
         )
 
     raise ValueError(f"Unknown property tag: {tag}")
@@ -65,13 +75,14 @@ def _parse_thresholds(elem: ET.Element) -> PIThresholds:
         attrs = {k: v for k, v in h.attrib.items() if k != "value"}
         highs.append(PIHighLevelThreshold(value=float(h.attrib["value"]), **attrs))
 
-    for l in elem.findall("pi:lowLevelThreshold", namespaces=NS):
-        attrs = {k: v for k, v in l.attrib.items() if k != "value"}
-        lows.append(PILowLevelThreshold(value=float(l.attrib["value"]), **attrs))
+    for lowLevelElem in elem.findall("pi:lowLevelThreshold", namespaces=NS):
+        attrs = {k: v for k, v in lowLevelElem.attrib.items() if k != "value"}
+        lows.append(
+            PILowLevelThreshold(value=float(lowLevelElem.attrib["value"]), **attrs)
+        )
 
     return PIThresholds(
-        highLevelThreshold=highs or None,
-        lowLevelThreshold=lows or None
+        highLevelThreshold=highs or None, lowLevelThreshold=lows or None
     )
 
 
@@ -131,20 +142,33 @@ def _parse_header(elem: ET.Element) -> PIHeader:
 
     # timeStep
     if (ts := elem.find("pi:timeStep", namespaces=NS)) is not None:
-        ts_kwargs = {k: int(v) if k in ("multiplier", "minutes") else v
-                     for k, v in ts.attrib.items()}
+        ts_kwargs = {
+            k: int(v) if k in ("multiplier", "minutes") else v
+            for k, v in ts.attrib.items()
+        }
         attribs["timeStep"] = ts_kwargs
 
     # optional scalar tags
     optional_tags = [
-        "missVal", "stationName", "longName", "units", "sourceOrganisation",
-        "sourceSystem", "fileDescription", "creationDate", "creationTime",
-        "lat", "lon", "x", "y", "z"
+        "missVal",
+        "stationName",
+        "longName",
+        "units",
+        "sourceOrganisation",
+        "sourceSystem",
+        "fileDescription",
+        "creationDate",
+        "creationTime",
+        "lat",
+        "lon",
+        "x",
+        "y",
+        "z",
     ]
 
     for tag in optional_tags:
-        if elem.find("pi:" + tag, namespaces= NS) is not None:
-            txt = elem.findtext("pi:" + tag, namespaces= NS)
+        if elem.find("pi:" + tag, namespaces=NS) is not None:
+            txt = elem.findtext("pi:" + tag, namespaces=NS)
             # float conversion for coords
             if tag in ("lat", "lon", "x", "y", "z"):
                 attribs[tag] = float(txt)
@@ -174,16 +198,13 @@ def _parse_series(elem: ET.Element) -> PISeries:
     # events
     events = [_parse_event(e) for e in elem.findall("pi:event", NS)]
 
-    return PISeries(
-        header=parsed_header,
-        properties=props,
-        event=events
-    )
+    return PISeries(header=parsed_header, properties=props, event=events)
 
 
 # ----------------------------------------------------------------------
 # MAIN ENTRY POINT
 # ----------------------------------------------------------------------
+
 
 def read(filepath: str) -> PITimeSeries:
     tree = ET.parse(filepath)
@@ -198,8 +219,4 @@ def read(filepath: str) -> PITimeSeries:
 
     series = [_parse_series(s) for s in root.findall("pi:series", NS)]
 
-    return PITimeSeries(
-        version=version,
-        timeZone=timeZone,
-        series=series
-    )
+    return PITimeSeries(version=version, timeZone=timeZone, series=series)

@@ -1,11 +1,6 @@
 from typing import List, Dict, Any, Optional, Union
 from datetime import datetime
-from .models import (
-    PITimeSeries, PISeries, PIHeader, PIEvent, PIProperty,
-    PIDateTime, PIThresholds, PIHighLevelThreshold, PILowLevelThreshold,
-    PIStringProperty, PIDoubleProperty, PILongProperty, PIIntProperty,
-    PIBooleanProperty, PIDateProperty, PIDateTimeProperty
-)
+from .models import PITimeSeries, PISeries, PIHeader, PIEvent, PIProperty, PIDateTime
 
 
 def create_pi_header(
@@ -34,13 +29,19 @@ def create_pi_header(
         "type": type,
         "locationId": location_id,
         "parameterId": parameter_id,
-        "startDate": PIDateTime(date=start_date.strftime("%Y-%m-%d"), time=start_date.strftime("%H:%M:%S")),
-        "endDate": PIDateTime(date=end_date.strftime("%Y-%m-%d"), time=end_date.strftime("%H:%M:%S")),
+        "startDate": PIDateTime(
+            date=start_date.strftime("%Y-%m-%d"), time=start_date.strftime("%H:%M:%S")
+        ),
+        "endDate": PIDateTime(
+            date=end_date.strftime("%Y-%m-%d"), time=end_date.strftime("%H:%M:%S")
+        ),
     }
 
     if "forecast_date" in kwargs:
         fd = kwargs.pop("forecast_date")
-        header_data["forecastDate"] = PIDateTime(date=fd.strftime("%Y-%m-%d"), time=fd.strftime("%H:%M:%S"))
+        header_data["forecastDate"] = PIDateTime(
+            date=fd.strftime("%Y-%m-%d"), time=fd.strftime("%H:%M:%S")
+        )
 
     header_data.update(kwargs)
     return PIHeader(**header_data)
@@ -49,7 +50,7 @@ def create_pi_header(
 def create_pi_series(
     header: PIHeader,
     events: List[Dict[str, Any]],
-    properties: Optional[List[PIProperty]] = None
+    properties: Optional[List[PIProperty]] = None,
 ) -> PISeries:
     """
     Creates a PISeries object from a header and event data.
@@ -77,7 +78,7 @@ def create_pi_series(
 def create_pi_timeseries(
     series: Union[PISeries, List[PISeries]],
     time_zone: float = 0.0,
-    version: str = "1.25"
+    version: str = "1.25",
 ) -> PITimeSeries:
     """
     Creates the root PITimeSeries object.
