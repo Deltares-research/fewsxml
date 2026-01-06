@@ -54,7 +54,7 @@ jobs:
 
     - name: Run tests
       run: |
-        python tests/run_tests.py
+        python run_tests.py
       working-directory: tests
 
     - name: Check for errors
