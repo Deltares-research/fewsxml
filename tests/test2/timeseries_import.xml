@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TimeSeries xmlns="http://www.wldelft.nl/fews/PI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.wldelft.nl/fews/PI https://fewsdocs.deltares.nl/schemas/version1.0/pi-schemas/pi_timeseries.xsd" version="1.2">
+    <timeZone>1.0</timeZone>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>BGH_H0_guess</locationId>
+            <parameterId>H</parameterId>
+            <timeStep unit="second" multiplier="600"/>
+            <startDate date="2024-03-31" time="00:00:00"/>
+            <endDate date="2024-03-31" time="00:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>HWG</stationName>
+            <units>mNAP</units>
+            <creationDate>2025-02-28</creationDate>
+            <creationTime>11:57:07</creationTime>
+        </header>
+        <event date="2024-03-31" time="00:00:00" value="-0.921" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>BGH_inflow</locationId>
+            <parameterId>Q</parameterId>
+            <timeStep unit="second" multiplier="600"/>
+            <startDate date="2024-03-31" time="00:00:00"/>
+            <endDate date="2024-03-31" time="04:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>HWG</stationName>
+            <units>m3/s</units>
+            <creationDate>2025-02-28</creationDate>
+            <creationTime>11:57:07</creationTime>
+        </header>
+        <event date="2024-03-31" time="00:00:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="00:10:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="00:20:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="00:30:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="00:40:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="00:50:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="01:00:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="01:10:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="01:20:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="01:30:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="01:40:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="01:50:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="02:00:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="02:10:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="02:20:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="02:30:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="02:40:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="02:50:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="03:00:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="03:10:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="03:20:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="03:30:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="03:40:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="03:50:00" value="0" flag="2"/>
+        <event date="2024-03-31" time="04:00:00" value="0" flag="2"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>GEM_HWG_htpy</locationId>
+            <parameterId>Q</parameterId>
+            <timeStep unit="second" multiplier="600"/>
+            <startDate date="2024-03-30" time="20:00:00"/>
+            <endDate date="2024-03-31" time="04:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>HWG</stationName>
+            <units>m3/s</units>
+            <creationDate>2025-02-28</creationDate>
+            <creationTime>11:57:07</creationTime>
+        </header>
+        <event date="2024-03-30" time="20:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:50:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="00:00:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="00:10:00" value="-47.254192" flag="0"/>
+        <event date="2024-03-31" time="00:20:00" value="-47.254192" flag="0"/>
+        <event date="2024-03-31" time="00:30:00" value="-47.254192" flag="0"/>
+        <event date="2024-03-31" time="00:40:00" value="-47.254192" flag="0"/>
+        <event date="2024-03-31" time="00:50:00" value="-47.254192" flag="0"/>
+        <event date="2024-03-31" time="01:00:00" value="-47.254192" flag="0"/>
+        <event date="2024-03-31" time="01:10:00" value="-0.033" flag="0"/>
+        <event date="2024-03-31" time="01:20:00" value="-0.033" flag="0"/>
+        <event date="2024-03-31" time="01:30:00" value="-0.033" flag="0"/>
+        <event date="2024-03-31" time="01:40:00" value="-0.033" flag="0"/>
+        <event date="2024-03-31" time="01:50:00" value="-0.033" flag="0"/>
+        <event date="2024-03-31" time="02:00:00" value="-0.033" flag="0"/>
+        <event date="2024-03-31" time="02:10:00" value="-0.006542" flag="0"/>
+        <event date="2024-03-31" time="02:20:00" value="-0.006542" flag="0"/>
+        <event date="2024-03-31" time="02:30:00" value="-0.006542" flag="0"/>
+        <event date="2024-03-31" time="02:40:00" value="-0.006542" flag="0"/>
+        <event date="2024-03-31" time="02:50:00" value="-0.006542" flag="0"/>
+        <event date="2024-03-31" time="03:00:00" value="-0.006542" flag="0"/>
+        <event date="2024-03-31" time="03:10:00" value="-0.142" flag="0"/>
+        <event date="2024-03-31" time="03:20:00" value="-0.142" flag="0"/>
+        <event date="2024-03-31" time="03:30:00" value="-0.142" flag="0"/>
+        <event date="2024-03-31" time="03:40:00" value="-0.142" flag="0"/>
+        <event date="2024-03-31" time="03:50:00" value="-0.142" flag="0"/>
+        <event date="2024-03-31" time="04:00:00" value="-0.142" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>GEM_HWG_P1</locationId>
+            <parameterId>status.pump_hist</parameterId>
+            <timeStep unit="second" multiplier="600"/>
+            <startDate date="2024-03-30" time="20:00:00"/>
+            <endDate date="2024-03-31" time="00:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>RTC_BGH_P1</stationName>
+            <units>-</units>
+            <creationDate>2025-02-28</creationDate>
+            <creationTime>11:57:07</creationTime>
+        </header>
+        <event date="2024-03-30" time="20:00:00" value="0"/>
+        <event date="2024-03-30" time="20:10:00" value="0"/>
+        <event date="2024-03-30" time="20:20:00" value="0"/>
+        <event date="2024-03-30" time="20:30:00" value="0"/>
+        <event date="2024-03-30" time="20:40:00" value="0"/>
+        <event date="2024-03-30" time="20:50:00" value="0"/>
+        <event date="2024-03-30" time="21:00:00" value="0"/>
+        <event date="2024-03-30" time="21:10:00" value="0"/>
+        <event date="2024-03-30" time="21:20:00" value="0"/>
+        <event date="2024-03-30" time="21:30:00" value="0"/>
+        <event date="2024-03-30" time="21:40:00" value="0"/>
+        <event date="2024-03-30" time="21:50:00" value="0"/>
+        <event date="2024-03-30" time="22:00:00" value="0"/>
+        <event date="2024-03-30" time="22:10:00" value="0"/>
+        <event date="2024-03-30" time="22:20:00" value="0"/>
+        <event date="2024-03-30" time="22:30:00" value="0"/>
+        <event date="2024-03-30" time="22:40:00" value="0"/>
+        <event date="2024-03-30" time="22:50:00" value="0"/>
+        <event date="2024-03-30" time="23:00:00" value="0"/>
+        <event date="2024-03-30" time="23:10:00" value="0"/>
+        <event date="2024-03-30" time="23:20:00" value="0"/>
+        <event date="2024-03-30" time="23:30:00" value="0"/>
+        <event date="2024-03-30" time="23:40:00" value="0"/>
+        <event date="2024-03-30" time="23:50:00" value="0"/>
+        <event date="2024-03-31" time="00:00:00" value="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>GEM_HWG_P2</locationId>
+            <parameterId>status.pump_hist</parameterId>
+            <timeStep unit="second" multiplier="600"/>
+            <startDate date="2024-03-30" time="20:00:00"/>
+            <endDate date="2024-03-31" time="00:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>RTC_BGH_P2</stationName>
+            <units>-</units>
+            <creationDate>2025-02-28</creationDate>
+            <creationTime>11:57:07</creationTime>
+        </header>
+        <event date="2024-03-30" time="20:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:50:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="00:00:00" value="0" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>GEM_HWG_P3</locationId>
+            <parameterId>status.pump_hist</parameterId>
+            <timeStep unit="second" multiplier="600"/>
+            <startDate date="2024-03-30" time="20:00:00"/>
+            <endDate date="2024-03-31" time="00:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>RTC_BGH_P3</stationName>
+            <units>-</units>
+            <creationDate>2025-02-28</creationDate>
+            <creationTime>11:57:07</creationTime>
+        </header>
+        <event date="2024-03-30" time="20:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:50:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="00:00:00" value="0" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>GEM_HWG</locationId>
+            <parameterId>Q.mode</parameterId>
+            <timeStep unit="second" multiplier="600"/>
+            <startDate date="2024-03-30" time="20:00:00"/>
+            <endDate date="2024-03-31" time="00:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>HWG</stationName>
+            <units>-</units>
+            <creationDate>2025-02-28</creationDate>
+            <creationTime>11:57:07</creationTime>
+        </header>
+        <event date="2024-03-30" time="20:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:50:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="00:00:00" value="0" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>GEM_HWG_P1</locationId>
+            <parameterId>q.pump</parameterId>
+            <timeStep unit="second" multiplier="600"/>
+            <startDate date="2024-03-30" time="20:00:00"/>
+            <endDate date="2024-03-31" time="00:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>RTC_BGH_P1</stationName>
+            <units>m3/s</units>
+            <creationDate>2025-02-28</creationDate>
+            <creationTime>11:57:07</creationTime>
+        </header>
+        <event date="2024-03-30" time="20:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:50:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="00:00:00" value="0" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>GEM_HWG_P2</locationId>
+            <parameterId>q.pump</parameterId>
+            <timeStep unit="second" multiplier="600"/>
+            <startDate date="2024-03-30" time="20:00:00"/>
+            <endDate date="2024-03-31" time="00:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>RTC_BGH_P2</stationName>
+            <units>m3/s</units>
+            <creationDate>2025-02-28</creationDate>
+            <creationTime>11:57:07</creationTime>
+        </header>
+        <event date="2024-03-30" time="20:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:50:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="00:00:00" value="0" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>GEM_HWG_P3</locationId>
+            <parameterId>q.pump</parameterId>
+            <timeStep unit="second" multiplier="600"/>
+            <startDate date="2024-03-30" time="20:00:00"/>
+            <endDate date="2024-03-31" time="00:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>RTC_BGH_P3</stationName>
+            <units>m3/s</units>
+            <creationDate>2025-02-28</creationDate>
+            <creationTime>11:57:07</creationTime>
+        </header>
+        <event date="2024-03-30" time="20:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="20:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="21:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="22:50:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:00:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:10:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:20:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:30:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:40:00" value="0" flag="0"/>
+        <event date="2024-03-30" time="23:50:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="00:00:00" value="0" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>GEM_HWG</locationId>
+            <parameterId>Qreq</parameterId>
+            <timeStep unit="second" multiplier="600"/>
+            <startDate date="2024-03-31" time="00:00:00"/>
+            <endDate date="2024-03-31" time="04:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>HWG</stationName>
+            <units>m3/s</units>
+            <creationDate>2025-02-28</creationDate>
+            <creationTime>11:57:07</creationTime>
+        </header>
+        <event date="2024-03-31" time="00:00:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="00:10:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="00:20:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="00:30:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="00:40:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="00:50:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="01:00:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="01:10:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="01:20:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="01:30:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="01:40:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="01:50:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="02:00:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="02:10:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="02:20:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="02:30:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="02:40:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="02:50:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="03:00:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="03:10:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="03:20:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="03:30:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="03:40:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="03:50:00" value="-999.0" flag="8"/>
+        <event date="2024-03-31" time="04:00:00" value="-999.0" flag="8"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>GEM_HWG_htpy</locationId>
+            <parameterId>Qreq_fish</parameterId>
+            <timeStep unit="second" multiplier="600"/>
+            <startDate date="2024-03-31" time="00:00:00"/>
+            <endDate date="2024-03-31" time="04:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>HWG</stationName>
+            <units>m3/s</units>
+            <creationDate>2025-02-28</creationDate>
+            <creationTime>11:08:08</creationTime>
+        </header>
+        <event date="2024-03-31" time="00:00:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="00:10:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="00:20:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="00:30:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="00:40:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="00:50:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="01:00:00" value="-999.0" flag="9"/>
+        <event date="2024-03-31" time="01:10:00" value="-999.0" flag="9"/>
+        <event date="2024-03-31" time="01:20:00" value="-999.0" flag="9"/>
+        <event date="2024-03-31" time="01:30:00" value="-999.0" flag="9"/>
+        <event date="2024-03-31" time="01:40:00" value="-999.0" flag="9"/>
+        <event date="2024-03-31" time="01:50:00" value="-999.0" flag="9"/>
+        <event date="2024-03-31" time="02:00:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="02:10:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="02:20:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="02:30:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="02:40:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="02:50:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="03:00:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="03:10:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="03:20:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="03:30:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="03:40:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="03:50:00" value="0" flag="0"/>
+        <event date="2024-03-31" time="04:00:00" value="0" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>GEM_HWG</locationId>
+            <parameterId>UnitPrice_m3s</parameterId>
+            <timeStep unit="second" multiplier="600"/>
+            <startDate date="2024-03-31" time="00:00:00"/>
+            <endDate date="2024-03-31" time="04:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>HWG</stationName>
+            <units>-</units>
+            <creationDate>2025-02-28</creationDate>
+            <creationTime>11:57:07</creationTime>
+        </header>
+        <event date="2024-03-31" time="00:00:00" value="0.332" flag="0"/>
+        <event date="2024-03-31" time="00:10:00" value="0.317" flag="0"/>
+        <event date="2024-03-31" time="00:20:00" value="0.317" flag="0"/>
+        <event date="2024-03-31" time="00:30:00" value="0.317" flag="0"/>
+        <event date="2024-03-31" time="00:40:00" value="0.317" flag="0"/>
+        <event date="2024-03-31" time="00:50:00" value="0.317" flag="0"/>
+        <event date="2024-03-31" time="01:00:00" value="0.317" flag="0"/>
+        <event date="2024-03-31" time="01:10:00" value="0.307" flag="0"/>
+        <event date="2024-03-31" time="01:20:00" value="0.307" flag="0"/>
+        <event date="2024-03-31" time="01:30:00" value="0.307" flag="0"/>
+        <event date="2024-03-31" time="01:40:00" value="0.307" flag="0"/>
+        <event date="2024-03-31" time="01:50:00" value="0.307" flag="0"/>
+        <event date="2024-03-31" time="02:00:00" value="0.307" flag="0"/>
+        <event date="2024-03-31" time="02:10:00" value="0.297" flag="0"/>
+        <event date="2024-03-31" time="02:20:00" value="0.297" flag="0"/>
+        <event date="2024-03-31" time="02:30:00" value="0.297" flag="0"/>
+        <event date="2024-03-31" time="02:40:00" value="0.297" flag="0"/>
+        <event date="2024-03-31" time="02:50:00" value="0.297" flag="0"/>
+        <event date="2024-03-31" time="03:00:00" value="0.297" flag="0"/>
+        <event date="2024-03-31" time="03:10:00" value="0.291" flag="0"/>
+        <event date="2024-03-31" time="03:20:00" value="0.291" flag="0"/>
+        <event date="2024-03-31" time="03:30:00" value="0.291" flag="0"/>
+        <event date="2024-03-31" time="03:40:00" value="0.291" flag="0"/>
+        <event date="2024-03-31" time="03:50:00" value="0.291" flag="0"/>
+        <event date="2024-03-31" time="04:00:00" value="0.291" flag="0"/>
+    </series>
+</TimeSeries>

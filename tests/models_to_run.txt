@@ -1,0 +1,9 @@
+***************************************************
+* This file indicates the inputs to run the tests *
+***************************************************
+* To skip a test, add a * at the beginning of the relevant line.
+test1
+test2
+test3
+test4_integer_timeStepSize
+test5
