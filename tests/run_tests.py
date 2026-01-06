@@ -52,6 +52,10 @@ def main(models_to_run_file):
                 dst_dir = os.path.join(cwd, run_dir, model)
                 shutil.rmtree(dst_dir)
                 shutil.copytree(src_dir, dst_dir)
+                # Ensure shared test utilities are available to the test module
+                utils_src = os.path.join(cwd, "utils")
+                if os.path.isdir(utils_src):
+                    shutil.copytree(utils_src, os.path.join(dst_dir, "utils"), dirs_exist_ok=True)
                 model_file_name = model + ".py"
                 success, message = run_model(os.path.join(dst_dir, model_file_name))
                 if success:
