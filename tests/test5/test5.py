@@ -1,12 +1,10 @@
 import os.path
 import sys
-
 import fewsxml as fx
-from datetime import datetime
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-
 from utils import schema_validator
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
+
 
 def run_example():
     parsed_timeseries = fx.read("timeseries_import.xml")
@@ -15,9 +13,9 @@ def run_example():
 
     is_valid = schema_validator.is_pi_timeseries_valid("timeseries_export.xml")
     if is_valid:
-        print(f"Cycle of read and write is valid.")
+        print("Cycle of read and write is valid.")
     else:
-        print(f"Cycle of read and write is NOT valid.")
+        print("Cycle of read and write is NOT valid.")
     assert is_valid
 
     # Making sure the forecast attribute is preserved

@@ -1,12 +1,10 @@
 import os.path
 import sys
-
 import fewsxml as fx
 from datetime import datetime
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-
 from utils import schema_validator
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 
 def run_example():
@@ -26,7 +24,7 @@ def run_example():
         timeStep=time_step,
         missVal="-999.9",
         stationName="Test Station",
-        units="m"
+        units="m",
     )
 
     # 2. Define the events (data points) for the series

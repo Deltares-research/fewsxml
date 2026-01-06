@@ -1,7 +1,4 @@
-import os.path
-
 import fewsxml as fx
-from datetime import datetime, timedelta
 
 
 parsed_xml = fx.read("timeseries_import_with_qualifier.xml")

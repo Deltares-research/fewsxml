@@ -3,11 +3,14 @@ import subprocess
 import shutil
 import sys
 
+
 def run_model(model_path):
     try:
         # Run the model file and capture the output
         model_dir = os.path.dirname(os.path.abspath(model_path))
-        result = subprocess.run([sys.executable, model_path], capture_output=True, text=True, cwd=model_dir)
+        result = subprocess.run(
+            [sys.executable, model_path], capture_output=True, text=True, cwd=model_dir
+        )
         # Check if there was an error
         if result.returncode != 0:
             return False, result.stderr
@@ -19,19 +22,24 @@ def run_model(model_path):
 def main(models_to_run_file):
     try:
         # Reading the test models and storing them in a dictionary
-        with open(models_to_run_file, 'r') as file:
-            models_to_run = [line.strip() for line in file if not line.strip().startswith('*') and line.strip()]
-        model_dict = dict()
+        with open(models_to_run_file, "r") as file:
+            models_to_run = [
+                line.strip()
+                for line in file
+                if not line.strip().startswith("*") and line.strip()
+            ]
 
         # Running the test models
-        with open("log_oneline.txt", 'w') as logfile_oneline, open("log.txt", 'w') as logfile:
+        with open("log_oneline.txt", "w") as logfile_oneline, open(
+            "log.txt", "w"
+        ) as logfile:
             # Creating a temporary folder to run the tests
             run_dir = "run_dir_tmp"
             try:
                 if os.path.exists(run_dir):
                     shutil.rmtree(run_dir)
                 os.makedirs(run_dir, exist_ok=False)
-            except Exception as e:
+            except Exception:
                 raise ValueError("The run directory could not be created.")
             for model_to_run in models_to_run:
                 os.mkdir(os.path.join(run_dir, model_to_run))
@@ -63,6 +71,6 @@ def main(models_to_run_file):
 
 
 if __name__ == "__main__":
-    models_to_run_file = 'models_to_run.txt'
+    models_to_run_file = "models_to_run.txt"
 
     main(models_to_run_file)

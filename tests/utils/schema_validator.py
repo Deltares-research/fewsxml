@@ -1,6 +1,7 @@
 import xmlschema
 from pathlib import Path
 
+
 def is_pi_timeseries_valid(xml_path: str, schema_url: str = None) -> bool:
     """
     Validate an XML file against the PI timeseries XSD.
@@ -15,9 +16,7 @@ def is_pi_timeseries_valid(xml_path: str, schema_url: str = None) -> bool:
     """
     # Default schema location (online)
     if schema_url is None:
-        schema_url = (
-            "https://fewsdocs.deltares.nl/schemas/version1.0/pi-schemas/pi_timeseries.xsd"
-        )
+        schema_url = "https://fewsdocs.deltares.nl/schemas/version1.0/pi-schemas/pi_timeseries.xsd"
 
     xml_file = Path(xml_path)
     if not xml_file.is_file():
@@ -34,6 +33,7 @@ def is_pi_timeseries_valid(xml_path: str, schema_url: str = None) -> bool:
         # Any exception typically means validation failed or schema load failed
         print(f"Validation error: {e}")
         return False
+
 
 if __name__ == "__main__":
     # Example usage
