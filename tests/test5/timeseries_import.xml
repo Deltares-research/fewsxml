@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TimeSeries xmlns="http://www.wldelft.nl/fews/PI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.wldelft.nl/fews/PI http://fews.wldelft.nl/schemas/version1.0/pi-schemas/pi_timeseries.xsd" version="1.2">
+    <timeZone>0.0</timeZone>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>LOC_A</locationId>
+            <parameterId>UnitPrice_m3s</parameterId>
+            <timeStep unit="second" multiplier="900"/>
+            <startDate date="2014-01-01" time="00:00:00"/>
+            <endDate date="2014-01-01" time="03:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>Station_A</stationName>
+            <units>Euro</units>
+        </header>
+        <event date="2014-01-01" time="00:00:00" value="0.082" flag="0"/>
+        <event date="2014-01-01" time="00:15:00" value="0.082" flag="0"/>
+        <event date="2014-01-01" time="00:30:00" value="0.082" flag="0"/>
+        <event date="2014-01-01" time="00:45:00" value="0.082" flag="0"/>
+        <event date="2014-01-01" time="01:00:00" value="0.082" flag="0"/>
+        <event date="2014-01-01" time="01:15:00" value="0.082" flag="0"/>
+        <event date="2014-01-01" time="01:30:00" value="0.082" flag="0"/>
+        <event date="2014-01-01" time="01:45:00" value="0.082" flag="0"/>
+        <event date="2014-01-01" time="02:00:00" value="0.082" flag="0"/>
+        <event date="2014-01-01" time="02:15:00" value="0.082" flag="0"/>
+        <event date="2014-01-01" time="02:30:00" value="0.082" flag="0"/>
+        <event date="2014-01-01" time="02:45:00" value="0.082" flag="0"/>
+        <event date="2014-01-01" time="03:00:00" value="0.082" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>LOC_B</locationId>
+            <parameterId>H</parameterId>
+            <timeStep unit="second" multiplier="900"/>
+            <startDate date="2014-01-01" time="00:00:00"/>
+            <endDate date="2014-01-01" time="03:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>Station_B</stationName>
+            <units>m</units>
+        </header>
+        <event date="2014-01-01" time="00:00:00" value="4.383" flag="0"/>
+        <event date="2014-01-01" time="00:15:00" value="4.383" flag="0"/>
+        <event date="2014-01-01" time="00:30:00" value="4.383" flag="0"/>
+        <event date="2014-01-01" time="00:45:00" value="6.393" flag="0"/>
+        <event date="2014-01-01" time="01:00:00" value="6.303" flag="0"/>
+        <event date="2014-01-01" time="01:15:00" value="6.306" flag="0"/>
+        <event date="2014-01-01" time="01:30:00" value="2.113" flag="0"/>
+        <event date="2014-01-01" time="01:45:00" value="2.115" flag="0"/>
+        <event date="2014-01-01" time="02:00:00" value="0.638" flag="0"/>
+        <event date="2014-01-01" time="02:15:00" value="0.642" flag="0"/>
+        <event date="2014-01-01" time="02:30:00" value="0.755" flag="0"/>
+        <event date="2014-01-01" time="02:45:00" value="0.865" flag="0"/>
+        <event date="2014-01-01" time="03:00:00" value="0.973" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>LOC_C</locationId>
+            <parameterId>Q</parameterId>
+            <timeStep unit="second" multiplier="900"/>
+            <startDate date="2014-01-01" time="00:00:00"/>
+            <endDate date="2014-01-01" time="03:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>Station_C</stationName>
+            <units>m3/s</units>
+        </header>
+        <event date="2014-01-01" time="00:00:00" value="0.0" flag="0"/>
+        <event date="2014-01-01" time="00:15:00" value="0.0" flag="0"/>
+        <event date="2014-01-01" time="00:30:00" value="0.0" flag="0"/>
+        <event date="2014-01-01" time="00:45:00" value="0.0" flag="0"/>
+        <event date="2014-01-01" time="01:00:00" value="0.0" flag="0"/>
+        <event date="2014-01-01" time="01:15:00" value="0.0" flag="0"/>
+        <event date="2014-01-01" time="01:30:00" value="0.0" flag="0"/>
+        <event date="2014-01-01" time="01:45:00" value="0.0" flag="0"/>
+        <event date="2014-01-01" time="02:00:00" value="0.0" flag="0"/>
+        <event date="2014-01-01" time="02:15:00" value="0.0" flag="0"/>
+        <event date="2014-01-01" time="02:30:00" value="0.0" flag="0"/>
+        <event date="2014-01-01" time="02:45:00" value="0.0" flag="0"/>
+        <event date="2014-01-01" time="03:00:00" value="0.0" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>LOC_D</locationId>
+            <parameterId>H</parameterId>
+            <timeStep unit="second" multiplier="900"/>
+            <startDate date="2014-01-01" time="00:00:00"/>
+            <endDate date="2014-01-01" time="00:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>Station_D</stationName>
+            <units>m</units>
+        </header>
+        <event date="2014-01-01" time="00:00:00" value="-0.651" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>LOC_E</locationId>
+            <parameterId>Q</parameterId>
+            <timeStep unit="second" multiplier="900"/>
+            <startDate date="2014-01-01" time="00:00:00"/>
+            <endDate date="2014-01-01" time="03:00:00"/>
+            <missVal>-999</missVal>
+            <stationName>Station_A</stationName>
+            <units>unit_unknown</units>
+            <creationDate>2000-01-01</creationDate>
+            <creationTime>00:00:00</creationTime>
+        </header>
+        <event date="2014-01-01" time="00:00:00" value="1.2341567890078387e-85"/>
+        <event date="2014-01-01" time="00:15:00" value="-0.12345678907722647"/>
+        <event date="2014-01-01" time="00:30:00" value="-0.34567898130938383"/>
+        <event date="2014-01-01" time="00:45:00" value="-8.765432196316132"/>
+        <event date="2014-01-01" time="01:00:00" value="-59.878787872666316"/>
+        <event date="2014-01-01" time="01:15:00" value="-50.91200935790536"/>
+        <event date="2014-01-01" time="01:30:00" value="-50.78995511253038334"/>
+        <event date="2014-01-01" time="01:45:00" value="-50.0005036681960289896"/>
+        <event date="2014-01-01" time="02:00:00" value="-50.0005889795123813585"/>
+        <event date="2014-01-01" time="02:15:00" value="-50.0005654440535028059"/>
+        <event date="2014-01-01" time="02:30:00" value="-0.0004404855335017212"/>
+        <event date="2014-01-01" time="02:45:00" value="-0.0003117699595388516"/>
+        <event date="2014-01-01" time="03:00:00" value="-0.0001007187911101245"/>
+    </series>
+       <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>LOC_A</locationId>
+            <parameterId>Qmax</parameterId>
+            <timeStep unit="second" multiplier="900"/>
+            <startDate date="2014-01-01" time="00:00:00"/>
+            <endDate date="2014-01-01" time="03:00:00"/>
+            <missVal>-999</missVal>
+            <stationName>Station_A</stationName>
+            <units>unit_unknown</units>
+            <creationDate>2000-01-01</creationDate>
+            <creationTime>00:00:00</creationTime>
+        </header>
+        <event date="2014-01-01" time="00:00:00" value="-17.0"/>
+        <event date="2014-01-01" time="00:15:00" value="-17.0"/>
+        <event date="2014-01-01" time="00:30:00" value="-17.0"/>
+        <event date="2014-01-01" time="00:45:00" value="-17.0"/>
+        <event date="2014-01-01" time="01:00:00" value="-17.0"/>
+        <event date="2014-01-01" time="01:15:00" value="-17.0"/>
+        <event date="2014-01-01" time="01:30:00" value="-17.0"/>
+        <event date="2014-01-01" time="01:45:00" value="-17.0"/>
+        <event date="2014-01-01" time="02:00:00" value="-17.0"/>
+        <event date="2014-01-01" time="02:15:00" value="-17.0"/>
+        <event date="2014-01-01" time="02:30:00" value="-17.0"/>
+        <event date="2014-01-01" time="02:45:00" value="-17.0"/>
+        <event date="2014-01-01" time="03:00:00" value="-17.0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>LOC_A</locationId>
+            <parameterId>Qmin</parameterId>
+            <timeStep unit="second" multiplier="900"/>
+            <startDate date="2014-01-01" time="00:00:00"/>
+            <endDate date="2014-01-01" time="03:00:00"/>
+            <missVal>-999</missVal>
+            <stationName>Station_A</stationName>
+            <units>unit_unknown</units>
+            <creationDate>2000-01-01</creationDate>
+            <creationTime>00:00:00</creationTime>
+        </header>
+        <event date="2014-01-01" time="00:00:00" value="0.0"/>
+        <event date="2014-01-01" time="00:15:00" value="0.0"/>
+        <event date="2014-01-01" time="00:30:00" value="0.0"/>
+        <event date="2014-01-01" time="00:45:00" value="0.0"/>
+        <event date="2014-01-01" time="01:00:00" value="0.0"/>
+        <event date="2014-01-01" time="01:15:00" value="0.0"/>
+        <event date="2014-01-01" time="01:30:00" value="0.0"/>
+        <event date="2014-01-01" time="01:45:00" value="0.0"/>
+        <event date="2014-01-01" time="02:00:00" value="0.0"/>
+        <event date="2014-01-01" time="02:15:00" value="0.0"/>
+        <event date="2014-01-01" time="02:30:00" value="0.0"/>
+        <event date="2014-01-01" time="02:45:00" value="0.0"/>
+        <event date="2014-01-01" time="03:00:00" value="0.0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>LOC_A</locationId>
+            <parameterId>Qreq</parameterId>
+            <timeStep unit="second" multiplier="900"/>
+            <startDate date="2014-01-01" time="00:00:00"/>
+            <endDate date="2014-01-01" time="03:00:00"/>
+            <missVal>-999</missVal>
+            <stationName>Station_A</stationName>
+            <units>unit_unknown</units>
+            <creationDate>2000-01-01</creationDate>
+            <creationTime>00:00:00</creationTime>
+        </header>
+        <event date="2014-01-01" time="00:00:00" value="-999"/>
+        <event date="2014-01-01" time="00:15:00" value="-999"/>
+        <event date="2014-01-01" time="00:30:00" value="-999"/>
+        <event date="2014-01-01" time="00:45:00" value="-999"/>
+        <event date="2014-01-01" time="01:00:00" value="-999"/>
+        <event date="2014-01-01" time="01:15:00" value="-999"/>
+        <event date="2014-01-01" time="01:30:00" value="-999"/>
+        <event date="2014-01-01" time="01:45:00" value="-999"/>
+        <event date="2014-01-01" time="02:00:00" value="-999"/>
+        <event date="2014-01-01" time="02:15:00" value="-999"/>
+        <event date="2014-01-01" time="02:30:00" value="-999"/>
+        <event date="2014-01-01" time="02:45:00" value="-999"/>
+        <event date="2014-01-01" time="03:00:00" value="-999"/>
+    </series> 
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>LOC_A_P1</locationId>
+            <parameterId>status.pump_hist</parameterId>
+            <timeStep unit="second" multiplier="900"/>
+            <startDate date="2013-12-31" time="21:00:00"/>
+            <endDate date="2014-01-01" time="00:00:00"/>
+            <forecastDate date="2014-01-01" time="00:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>Station_C</stationName>
+            <units>m</units>
+        </header>
+        <event date="2013-12-31" time="21:00:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="21:15:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="21:30:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="21:45:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="22:00:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="22:15:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="22:30:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="22:45:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="23:00:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="23:15:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="23:30:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="23:45:00" value="0" flag="0"/>
+        <event date="2014-01-01" time="00:00:00" value="0" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>LOC_A_P2</locationId>
+            <parameterId>status.pump_hist</parameterId>
+            <timeStep unit="second" multiplier="900"/>
+            <startDate date="2013-12-31" time="21:00:00"/>
+            <endDate date="2014-01-01" time="00:00:00"/>
+            <forecastDate date="2014-01-01" time="00:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>Station_C</stationName>
+            <units>m</units>
+        </header>
+        <event date="2013-12-31" time="21:00:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="21:15:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="21:30:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="21:45:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="22:00:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="22:15:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="22:30:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="22:45:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="23:00:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="23:15:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="23:30:00" value="0" flag="0"/>
+        <event date="2013-12-31" time="23:45:00" value="0" flag="0"/>
+        <event date="2014-01-01" time="00:00:00" value="0" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>LOC_A_P1</locationId>
+            <parameterId>q.pump</parameterId>
+            <timeStep unit="second" multiplier="900"/>
+            <startDate date="2014-01-01" time="00:00:00"/>
+            <endDate date="2014-01-01" time="00:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>Station_D</stationName>
+            <units>m</units>
+        </header>
+        <event date="2014-01-01" time="00:00:00" value="0.0" flag="0"/>
+    </series>
+    <series>
+        <header>
+            <type>instantaneous</type>
+            <locationId>LOC_A_P2</locationId>
+            <parameterId>q.pump</parameterId>
+            <timeStep unit="second" multiplier="900"/>
+            <startDate date="2014-01-01" time="00:00:00"/>
+            <endDate date="2014-01-01" time="00:00:00"/>
+            <missVal>-999.0</missVal>
+            <stationName>Station_D</stationName>
+            <units>m</units>
+        </header>
+        <event date="2014-01-01" time="00:00:00" value="0.0" flag="0"/>
+    </series>
+</TimeSeries>

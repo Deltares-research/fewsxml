@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fewsxml-tests"
+version = "0.1.0"
+description = "Tests for fewsxml"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fewsxml",
+    "xmlschema",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["run_dir_tmp"]
+namespaces = false
