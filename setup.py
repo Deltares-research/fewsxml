@@ -1,10 +1,9 @@
 from setuptools import setup, find_packages
-
 setup(
     name="fewsxml",
     version="0.2.0",
     packages=find_packages(),
-    install_requires=["pydantic"],
+    install_requires=["pydantic>=2", "defusedxml>=0.7.0"],
     include_package_data=True,
     author="Farid Alavi",
     author_email="farid.alavi@deltares.nl",
