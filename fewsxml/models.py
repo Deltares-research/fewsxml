@@ -6,8 +6,6 @@ from pydantic import BaseModel
 # ======================================================
 # BASE MODEL (allows unknown attributes)
 # ======================================================
-
-
 class XModel(BaseModel):
     model_config = dict(extra="allow")
 
@@ -15,8 +13,6 @@ class XModel(BaseModel):
 # ======================================================
 # BASIC DATE/TIME
 # ======================================================
-
-
 class PIDateTime(XModel):
     date: str
     time: str
@@ -25,8 +21,6 @@ class PIDateTime(XModel):
 # ======================================================
 # PROPERTIES
 # ======================================================
-
-
 class PIStringProperty(XModel):
     key: str
     value: str
@@ -77,8 +71,6 @@ PIProperty = Union[
 # ======================================================
 # THRESHOLDS
 # ======================================================
-
-
 class PIThresholdBase(XModel):
     id: Optional[str] = None
     name: Optional[str] = None
@@ -106,8 +98,6 @@ class PIThresholds(XModel):
 # ======================================================
 # TIMESTEP
 # ======================================================
-
-
 class PITimeStep(XModel):
     unit: Optional[str] = None
     multiplier: Optional[int] = None
@@ -117,77 +107,55 @@ class PITimeStep(XModel):
 # ======================================================
 # EVENT
 # ======================================================
-
-
 class PIEvent(XModel):
     date: Optional[str] = None
     time: Optional[str] = None
-
     startDate: Optional[str] = None
     startTime: Optional[str] = None
     endDate: Optional[str] = None
     endTime: Optional[str] = None
-
     value: Optional[Union[float, str]] = None
     minValue: Optional[float] = None
     maxValue: Optional[float] = None
-
     flag: Optional[int] = None
-
-    # unknown fs:* attributes accepted automatically (via extra="allow")
+    # unknown/fs:* attributes accepted automatically (via extra="allow")
 
 
 # ======================================================
 # HEADER
 # ======================================================
-
-
 class PIHeader(XModel):
     type: str
-
     moduleInstanceId: Optional[str] = None
     locationId: str
     parameterId: str
-
     qualifierId: Optional[List[str]] = None
-
     ensembleId: Optional[str] = None
     ensembleMemberIndex: Optional[int] = None
-
     timeStep: Optional[PITimeStep] = None
-
     startDate: PIDateTime
     endDate: PIDateTime
     forecastDate: Optional[PIDateTime] = None
-
     missVal: Optional[str] = None
     stationName: Optional[str] = None
-
     lat: Optional[float] = None
     lon: Optional[float] = None
     x: Optional[float] = None
     y: Optional[float] = None
     z: Optional[float] = None
-
     longName: Optional[str] = None
     units: Optional[str] = None
-
     sourceOrganisation: Optional[str] = None
     sourceSystem: Optional[str] = None
-
     fileDescription: Optional[str] = None
-
     creationDate: Optional[str] = None
     creationTime: Optional[str] = None
-
     thresholds: Optional[PIThresholds] = None
 
 
 # ======================================================
 # SERIES
 # ======================================================
-
-
 class PISeries(XModel):
     header: PIHeader
     properties: Optional[List[PIProperty]] = None
@@ -197,9 +165,7 @@ class PISeries(XModel):
 # ======================================================
 # ROOT
 # ======================================================
-
-
 class PITimeSeries(XModel):
-    version: Optional[str]
-    timeZone: float
+    version: Optional[str] = None
+    timeZone: Optional[float] = None
     series: List[PISeries]
