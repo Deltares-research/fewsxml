@@ -109,8 +109,9 @@ def _iter_extra_attributes(model):
     """Yield Pydantic v2 extra attributes, falling back to __dict__ for compatibility."""
     extra = getattr(model, "model_extra", None) or {}
     yield from extra.items()
+    model_fields = getattr(type(model), "model_fields", {})
     for k, v in getattr(model, "__dict__", {}).items():
-        if k not in getattr(model, "model_fields", {}):
+        if k not in model_fields and k not in extra:
             yield k, v
 
 

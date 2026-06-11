@@ -204,7 +204,7 @@
         <event date="2014-01-01" time="02:30:00" value="-999"/>
         <event date="2014-01-01" time="02:45:00" value="-999"/>
         <event date="2014-01-01" time="03:00:00" value="-999"/>
-    </series> 
+    </series>
     <series>
         <header>
             <type>instantaneous</type>

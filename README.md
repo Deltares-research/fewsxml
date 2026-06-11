@@ -7,6 +7,7 @@
 - [Usage Example](#usage-example)
   - [Creating a PI-XML File and Writing to Disk](#creating-a-pi-xml-file-and-writing-to-disk)
   - [Reading a PI-XML File and Creating Pydantic Models](#reading-a-pi-xml-file-and-creating-pydantic-models)
+- [Developer Documentation](#developer-documentation)
 - [API Reference](#api-reference)
 - [Schema Compatibility](#schema-compatibility)
 
@@ -17,8 +18,8 @@ pip install fewsxml
 
 ## Overview
 
-fewsxml provides Python APIs to construct, read, and write PI-XML files 
-compatible with the Delft-FEWS system. It uses Pydantic models for data 
+fewsxml provides Python APIs to construct, read, and write PI-XML files
+compatible with the Delft-FEWS system. It uses Pydantic models for data
 validation and supports the PI TimeSeries schema.
 
 There are two main categories of functions:
@@ -73,10 +74,14 @@ import fewsxml as fx
 parsed_timeseries = fx.read("timeseries_import.xml")
 ```
 
-The `parsed_timeseries` variable now contains a `PITimeSeries` object 
-with all data from the XML file, accessible via Pydantic models. As mentioned in the previous example, you can create an XML file 
-from these models using the `write` function: `fx.write(parsed_timeseries, "output.xml")`. 
+The `parsed_timeseries` variable now contains a `PITimeSeries` object
+with all data from the XML file, accessible via Pydantic models. As mentioned in the previous example, you can create an XML file
+from these models using the `write` function: `fx.write(parsed_timeseries, "output.xml")`.
 The created XML file will be compatible with the PI TimeSeries schema.
+
+## Developer Documentation
+
+Developers and contributors should refer to the [Developer Guide](DEVELOPERS.md) for test, CI, and pre-commit instructions.
 
 ## API Reference
 

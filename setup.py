@@ -4,6 +4,11 @@ setup(
     version="0.2.0",
     packages=find_packages(),
     install_requires=["pydantic>=2", "defusedxml>=0.7.0"],
+    extras_require={
+        "test": ["pytest>=8", "xmlschema>=3"],
+        "dev": ["pytest>=8", "xmlschema>=3", "flake8>=7", "pre-commit>=3"],
+    },
+    package_data={"fewsxml.tests": ["fixtures/*.xml"]},
     include_package_data=True,
     author="Farid Alavi",
     author_email="farid.alavi@deltares.nl",
