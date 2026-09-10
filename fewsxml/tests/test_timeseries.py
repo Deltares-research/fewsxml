@@ -54,6 +54,19 @@ def test_created_timeseries_is_schema_valid(time_step: fx.PITimeStep, tmp_path: 
         assert 'multiplier="600"' in output.read_text(encoding="utf-8")
 
 
+def test_integer_event_value_preserves_type_and_xml_format(tmp_path: Path) -> None:
+    timeseries = _sample_pi_timeseries(fx.PITimeStep(unit="hour", multiplier=1))
+    timeseries.series[0].event[0] = fx.PIEvent(
+        date="2024-01-01", time="10:00:00", value=10
+    )
+    output = tmp_path / "integer_event.xml"
+
+    fx.write(timeseries, str(output))
+
+    assert type(timeseries.series[0].event[0].value) is int
+    assert 'value="10"' in output.read_text(encoding="utf-8")
+
+
 def test_imported_timeseries_roundtrip_is_schema_valid(fixtures_dir: Path, tmp_path: Path) -> None:
     parsed_timeseries = fx.read(str(fixtures_dir / "timeseries_import.xml"))
     output = tmp_path / "timeseries_export.xml"

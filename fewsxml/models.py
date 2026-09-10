@@ -114,7 +114,7 @@ class PIEvent(XModel):
     startTime: Optional[str] = None
     endDate: Optional[str] = None
     endTime: Optional[str] = None
-    value: Optional[Union[float, str]] = None
+    value: Optional[Union[int, float, str]] = None
     minValue: Optional[float] = None
     maxValue: Optional[float] = None
     flag: Optional[int] = None
