@@ -151,13 +151,13 @@ def _add_event(parent: ET.Element, ev):
 def write(pi: PITimeSeries, filename: str):
     NS = "http://www.wldelft.nl/fews/PI"
     XSI = "http://www.w3.org/2001/XMLSchema-instance"
-    ET.register_namespace("", NS)
-    ET.register_namespace("xsi", XSI)
     root = ET.Element(
-        f"{{{NS}}}TimeSeries",
+        "TimeSeries",
         {
+            "xmlns": NS,
+            "xmlns:xsi": XSI,
             "version": pi.version if pi.version else "",
-            f"{{{XSI}}}schemaLocation": f"{NS} https://fewsdocs.deltares.nl/schemas/version1.0/pi-schemas/pi_timeseries.xsd",
+            "xsi:schemaLocation": f"{NS} https://fewsdocs.deltares.nl/schemas/version1.0/pi-schemas/pi_timeseries.xsd",
         },
     )
     # <timeZone>

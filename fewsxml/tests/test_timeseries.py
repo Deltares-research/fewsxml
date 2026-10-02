@@ -1,5 +1,6 @@
 from datetime import datetime
 from pathlib import Path
+import xml.etree.ElementTree as ET
 
 import pytest
 
@@ -52,6 +53,24 @@ def test_created_timeseries_is_schema_valid(time_step: fx.PITimeStep, tmp_path: 
     assert schema_validator.is_pi_timeseries_valid(str(output))
     if time_step.unit == "second":
         assert 'multiplier="600"' in output.read_text(encoding="utf-8")
+
+
+def test_write_preserves_elementtree_namespace_registry(tmp_path: Path) -> None:
+    namespace_registry = getattr(ET, "_namespace_map")
+    original_namespace_map = namespace_registry.copy()
+    try:
+        ET.register_namespace("pi", "http://www.wldelft.nl/fews/PI")
+        expected_namespace_map = namespace_registry.copy()
+
+        fx.write(
+            _sample_pi_timeseries(fx.PITimeStep(unit="hour", multiplier=1)),
+            str(tmp_path / "timeseries.xml"),
+        )
+
+        assert namespace_registry == expected_namespace_map
+    finally:
+        namespace_registry.clear()
+        namespace_registry.update(original_namespace_map)
 
 
 def test_integer_event_value_preserves_type_and_xml_format(tmp_path: Path) -> None:
